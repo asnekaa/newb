@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "newB - Bilibili (B站) 体验优化引擎",
+  "short_name": "newB",
+  "version": "1.0.0",
+  "description": "极致优化 Bilibili (B站) 体验：页面净化、智能过滤、布局美化与防卡顿。",
+  "default_locale": "zh_CN",
+  "author": "ESnake",
+  
+  "icons": {
+    "128": "assets/icons/icon.png"
+  },
+
+  "permissions":[
+    "storage"
+  ],
+
+  "host_permissions":[
+    "*://*.bilibili.com/*",
+    "*://api.bilibili.com/*"
+  ],
+
+  "action": {
+    "default_icon": {
+      "128": "assets/icons/icon.png"
+    },
+    "default_title": "newB",
+    "default_popup": "popup/popup.html"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources":["assets/icons/bililv.svg"],
+      "matches": ["*://*.bilibili.com/*"]
+    }
+  ],
+
+  "content_scripts":[
+    {
+      "matches": ["*://*.bilibili.com/*"],
+      "css":[
+        "assets/css/base.css",
+        "assets/css/video-info-hover.css",
+        "assets/css/user-info-hover.css",
+        "assets/css/layout-optimizer.css"
+      ],
+      "js":[
+        "common/utils.js",
+        "common/bili-api.js",
+        "common/config-manager.js",
+        "content/core/ui-engine.js",
+        "content/modules/cleanup-engine.js",
+        "content/modules/filter-engine.js",
+        "content/modules/video-info-hover.js",
+        "content/modules/user-info-hover.js",
+        "content/modules/cover-viewer.js",
+        "content/core/main.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.bilibili.com/*"],
+      "js":[
+        "inject/web-components-patch.js",
+        "inject/network-interceptor.js" 
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
