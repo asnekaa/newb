@@ -41,7 +41,12 @@ body {
 /* Tab 切换面板 */
 .tab-pane {
   display: none;
-  &.active { display: block; }
+
+  &.active {
+    display: block;
+  }
+
+  /* 确保这里是 block，维持整个页面的原生滚动 */
 }
 
 /* --- 3. 侧边栏导航 (Sidebar Navigation) --- */
@@ -218,6 +223,10 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
+  /* 核心修改：高度设为弹窗可视高度 (100vh - content的上下padding共30px) */
+  height: calc(100vh - 30px);
+  display: flex;
+  flex-direction: column;
 
   .log-header {
     padding: 10px 12px;
@@ -230,10 +239,11 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
     font-weight: bold;
   }
 
-  .log-list {
-    max-height: 300px;
-    overflow-y: auto;
-  }
+    .log-list {
+      /* 移除固定最大高度，改为自适应撑满并允许内部滚动 */
+      flex: 1;
+      overflow-y: auto;
+    }
 
   .log-item {
     padding: 10px 12px;

@@ -109,8 +109,8 @@ class FilterEngine {
                 const newLogs = logsToSave.filter(nl => 
                     !blockedLogs.some(l => l.title === nl.title && (Date.now() - l.time < 5000))
                 );
-                // 仅保留最近 50 条记录
-                chrome.storage.local.set({ blockedLogs:[...newLogs, ...blockedLogs].slice(0, 50) });
+                // 仅保留最近 100 条记录
+                chrome.storage.local.set({ blockedLogs:[...newLogs, ...blockedLogs].slice(0, 100) });
             });
         }, 500);
     }
