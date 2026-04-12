@@ -43,10 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 3. 夜间模式渲染与自身主题切换
         const nm = ui.nightMode || { enabled: true, followSystem: true, start: "18:00", end: "06:00" };
         
-        // 状态映射：将底层配置映射为 UI 的 4 种模式
-        let mode = 'off';
-        if (nm.enabled) {
-            if (nm.followSystem) mode = 'system';
+        // 状态映射：优先读取显式保存的 mode，兼容旧版配置
+        let mode = nm.mode;
+        if (!mode) {
+            if (!nm.enabled) mode = 'off';
+            else if (nm.followSystem) mode = 'system';
             else if (nm.start === '00:00' && nm.end === '23:59') mode = 'on';
             else mode = 'custom';
         }
@@ -141,6 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const nightModeSelect = document.getElementById('ui-night-mode-select').value;
         config.ui.nightMode = {
+            mode: nightModeSelect, // 显式保存 UI 模式，防止时间重合导致的状态回弹
             enabled: nightModeSelect !== 'off',
             followSystem: nightModeSelect === 'system',
             // 巧妙映射：当选择"始终开启"时，将时间段设为全天，无需修改底层引擎代码
