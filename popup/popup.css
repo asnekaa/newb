@@ -218,8 +218,7 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
-  /* 核心修改：高度设为弹窗可视高度 (100vh - content的上下padding共30px) */
-  height: calc(100vh - 30px);
+  max-height: calc(100vh - 30px);
   display: flex;
   flex-direction: column;
 
