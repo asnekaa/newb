@@ -1,7 +1,3 @@
-/* ==========================================
- * UP主信息悬浮窗样式 (User Info Hover Card)
- * ========================================== */
-
 /* 屏蔽 B 站原生 UP 主悬浮窗 */
 :root.newb-user-info-hover-enabled .usercard-wrap,
 :root.newb-user-info-hover-enabled .bili-user-profile-view,

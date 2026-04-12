@@ -1,7 +1,3 @@
-/* ==========================================
- * 视频信息悬浮窗样式 (Video Info Hover Card)
- * ========================================== */
-
 /* --- 1. 悬浮窗基础容器 --- */
 #newb-video-info-card {
   /* 定位与层级 */
@@ -30,60 +26,11 @@
     transition: opacity 0.2s ease-out, transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
   
     /* 激活显示状态 */
-    ```[LOCATE: Original Code] ```css
-  
-    /* --- 4. 关键帧动画定义 (Keyframes) --- */
-    @keyframes newb-skeleton-loading {
-      0% {
-        background-position: 100% 50%;
-      }
-  
-      100% {
-        background-position: 0 50%;
-      }
+    &.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
-  
-    @keyframes newb-fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(4px);
-      }
-  
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  
-    ```[ACTION: REPLACE] ```css
-  
-    /* --- 4. 关键帧动画定义 (Keyframes) --- */
-    @keyframes newb-skeleton-loading {
-      0% {
-        background-position: 100% 50%;
-      }
-  
-      100% {
-        background-position: 0 50%;
-      }
-    }
-  
-    @keyframes newb-fade-in {
-  
-      /* 移除 Y 轴位移，仅保留透明度渐变，消除视觉两段跳的割裂感 */
-      from {
-        opacity: 0;
-      }
-  
-      to {
-        opacity: 1;
-      }
-    }
-  &.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
 
   /* --- 2. 骨架屏加载动画 (Skeleton UI) --- */
   .newb-skeleton {
@@ -236,12 +183,25 @@
 
 /* --- 4. 关键帧动画定义 (Keyframes) --- */
 @keyframes newb-skeleton-loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
+
 @keyframes newb-fade-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+
+  /* 移除 Y 轴位移，仅保留透明度渐变，消除视觉两段跳的割裂感 */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* ==========================================
