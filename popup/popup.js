@@ -47,14 +47,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('ui-night-start').value = nm.start;
         document.getElementById('ui-night-end').value = nm.end;
 
-        // 控制时间选择器的显示状态 (开启跟随系统时置灰)
+        // 控制时间选择器的显示状态 (开启跟随系统时隐藏)
         const timeRangeEl = document.getElementById('night-time-range');
         if (nm.followSystem) {
-            timeRangeEl.style.opacity = '0.5';
-            timeRangeEl.style.pointerEvents = 'none';
+            timeRangeEl.style.display = 'none';
         } else {
-            timeRangeEl.style.opacity = '1';
-            timeRangeEl.style.pointerEvents = 'auto';
+            timeRangeEl.style.display = 'flex';
         }
 
         const isTimeInRange = (startStr, endStr) => {
