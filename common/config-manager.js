@@ -29,7 +29,6 @@ class ConfigManager {
             ui: {
                 layoutOptimization: true,
                 showIpLocation: false,
-                optimizeCdn: true,
                 hidePinnedAd: true,
                 videoInfoHover: true,
                 videoInfoHoverAi: true,

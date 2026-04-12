@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const ui = config.ui;
         document.getElementById('ui-layout-opt').checked = ui.layoutOptimization;
         document.getElementById('ui-show-ip').checked = ui.showIpLocation;
-        document.getElementById('ui-optimize-cdn').checked = ui.optimizeCdn ?? true;
         document.getElementById('ui-hide-hot-search').checked = ui.hideHotSearch ?? false;
         document.getElementById('ui-show-cover-viewer').checked = ui.showCoverViewer ?? false;
         document.getElementById('ui-video-info-hover').checked = ui.videoInfoHover ?? true;
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         config.ui.layoutOptimization = document.getElementById('ui-layout-opt').checked;
         config.ui.showIpLocation = document.getElementById('ui-show-ip').checked;
-        config.ui.optimizeCdn = document.getElementById('ui-optimize-cdn').checked;
         config.ui.hideHotSearch = document.getElementById('ui-hide-hot-search').checked;
         config.ui.showCoverViewer = document.getElementById('ui-show-cover-viewer').checked;
         config.ui.videoInfoHover = document.getElementById('ui-video-info-hover').checked;
@@ -168,9 +166,9 @@ document.addEventListener('DOMContentLoaded', async () => {
      */
     const bindEvents = () => {
         // 1. 绑定所有开关与输入框的 Change 事件
-            const inputs =[
+        const inputs =[
             'master-switch', 'cleanup-enabled', 'ui-layout-opt', 'ui-show-ip', 
-            'ui-optimize-cdn', 'ui-hide-hot-search', 'ui-show-cover-viewer', 
+            'ui-hide-hot-search', 'ui-show-cover-viewer', 
             'ui-video-info-hover', 'ui-video-info-hover-ai', 'ui-video-info-hover-reply', 
             'ui-user-info-hover', 'ui-video-info-delay', 'ui-night-enabled', 
             'ui-night-follow-system', 'ui-night-start', 'ui-night-end', 'min-duration'

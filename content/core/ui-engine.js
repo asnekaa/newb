@@ -5,7 +5,6 @@ class UIEngine {
         this.nightModeClass = 'newb-night-mode';
         this.storageKeyLayout = 'newb_layout_opt';
         this.storageKeyIp = 'newb_show_ip';
-        this.storageKeyCdn = 'newb_optimize_cdn';
         
         this.currentNightModeConfig = null; // 缓存夜间模式配置
         this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -44,7 +43,6 @@ class UIEngine {
         
         const isLayoutEnabled = isMasterOn && !!uiCfg.layoutOptimization;
         const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
-        const isCdnEnabled = isMasterOn && (uiCfg.optimizeCdn ?? true);
         const isHideHotSearch = isMasterOn && !!uiCfg.hideHotSearch;
         const isUserInfoHover = isMasterOn && (uiCfg.userInfoHover ?? true);
         const nm = isMasterOn ? (uiCfg.nightMode || { enabled: false }) : { enabled: false };
@@ -53,7 +51,6 @@ class UIEngine {
         localStorage.setItem('newb_master_switch', isMasterOn);
         localStorage.setItem(this.storageKeyLayout, isLayoutEnabled);
         localStorage.setItem(this.storageKeyIp, isIpEnabled);
-        localStorage.setItem(this.storageKeyCdn, isCdnEnabled);
 
         // 3. 布局优化注入 (规避个人空间页面的样式冲突)
         const root = document.documentElement;
