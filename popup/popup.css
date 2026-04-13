@@ -306,7 +306,7 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
   .status-msg { margin-top: 10px; font-size: 12px; color: #52c41a; text-align: center; }
 }
 
-/* --- 6. 夜间模式深度适配 (Dark Mode) --- */
+/* --- 6. 夜间模式适配 --- */
 body.dark-mode {
   /* 覆写全局变量 */
   --bg-color: #111820;

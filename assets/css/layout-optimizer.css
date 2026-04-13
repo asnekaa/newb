@@ -12,10 +12,7 @@
     60% { background-color: #ffffff; } 
 }
 
-/* ==========================================
- * 核心布局优化 (Core Layout Optimization)
- * 触发条件：开启"优化页面布局" (:root.newb-optimized-layout)
- * ========================================== */
+/* 核心布局优化 */
 :root.newb-optimized-layout {
     /* --- 1. 全局主题变量注入 --- */
     --Wh0_rgb: transparent !important;
@@ -174,7 +171,7 @@
         } 
     }
 
-    /* --- 8. 播放页深度优化 --- */
+    /* --- 8. 播放页优化 --- */
     /* 右侧推荐列表卡片化 */
     .next-play, .rec-list { 
         position: relative; 
@@ -286,10 +283,7 @@
     .home-container > div > div[class^="navTools"] > div > a[title="帮助反馈"] { display: none; }
 }
 
-/* ==========================================
- * 夜间模式深度适配 (Night Mode Adaptation)
- * 触发条件：开启"夜间模式" (:root.newb-night-mode)
- * ========================================== */
+/* 夜间模适配 */
 :root.newb-night-mode {
     /* --- 1. 暗黑主题变量覆盖 --- */
     --newb-bottom-bg: #1a232c !important;
