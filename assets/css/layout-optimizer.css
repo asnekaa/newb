@@ -48,6 +48,10 @@
         background: rgba(148, 153, 160, 0.5);
     }
 
+    & ::-webkit-scrollbar-thumb:active {
+        background: rgba(148, 153, 160, 0.7);
+    }
+
     /* --- 3. 首页与信息流净化 --- */
     /* 隐藏：调色板、桌面端下载提示、固定频道头、广告卡片、轮播图、直播与单列卡片 */
     .palette-button-outer.palette-feed4,
@@ -333,6 +337,10 @@
 
     & ::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.25);
+    }
+
+    & ::-webkit-scrollbar-thumb:active {
+        background: rgba(255, 255, 255, 0.35);
     }
 
     /* --- 3. 视频卡片暗黑化 --- */
