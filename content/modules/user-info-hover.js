@@ -104,7 +104,7 @@ class UserInfoHoverEngine {
         let verifyHtml = '';
         if (info.official && info.official.role !== 0) {
             const vColor = info.official.type === 0 ? '#f3a034' : '#00aeec';
-            verifyHtml = `<div class="newb-u-verify" style="color: ${vColor}"><svg width="14" height="14" viewBox="0 0 32 32"><path fill="currentColor" d="M16 31.4L3.4 24.2V9.8L16 2.6l12.6 7.2v14.4L16 31.4zM13.8 22.6l10.4-10.4-2.2-2.2-8.2 8.2-3.8-3.8-2.2 2.2 6 6z"/></svg>${info.official.title}</div>`;
+            verifyHtml = `<div class="newb-u-verify" style="color: ${vColor}"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M10.5 6h-3l1-4c.1-.3-.2-.5-.5-.4L3.5 7.5c-.2.2-.1.5.2.5h3l-1 4c-.1.3.2.5.5.4l4.5-5.9c.2-.2.1-.5-.2-.5z" fill="#fff"/></svg>${info.official.title}</div>`;
         }
 
         const cookieMatch = document.cookie.match(/DedeUserID=([^;]+)/);
