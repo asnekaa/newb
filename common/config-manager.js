@@ -28,6 +28,7 @@ class ConfigManager {
                     end: "06:00"
                 },
                 layoutOptimization: true,
+                hideRecommend: false,
                 hideHotSearch: true,
                 videoInfoHover: true,
                 videoInfoHoverAi: true,

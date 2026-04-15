@@ -42,9 +42,10 @@ class UIEngine {
         const uiCfg = config.ui || {};
         
         const isLayoutEnabled = isMasterOn && !!uiCfg.layoutOptimization;
-        const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
+        const isHideRecommend = isMasterOn && !!uiCfg.hideRecommend;
         const isHideHotSearch = isMasterOn && !!uiCfg.hideHotSearch;
         const isUserInfoHover = isMasterOn && (uiCfg.userInfoHover ?? true);
+        const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
         const nm = isMasterOn ? (uiCfg.nightMode || { enabled: false }) : { enabled: false };
         
         // 2. 跨域/跨页面状态同步 (供 inject 脚本读取)
@@ -58,6 +59,7 @@ class UIEngine {
         
         root.classList.toggle(this.namespaceClass, isLayoutEnabled && !isSpacePage);
         root.classList.toggle('newb-hide-hot-search', isHideHotSearch);
+        root.classList.toggle('newb-hide-recommend', isHideRecommend);
         root.classList.toggle('newb-user-info-hover-enabled', isUserInfoHover);
 
         // 4. 夜间模式调度与主题锁定

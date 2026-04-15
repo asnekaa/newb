@@ -31,14 +31,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 2. UI 增强开关渲染
         const ui = config.ui;
         document.getElementById('ui-layout-opt').checked = ui.layoutOptimization;
-        document.getElementById('ui-show-ip').checked = ui.showIpLocation;
+        document.getElementById('ui-hide-recommend').checked = ui.hideRecommend ?? false;
         document.getElementById('ui-hide-hot-search').checked = ui.hideHotSearch ?? false;
-        document.getElementById('ui-show-cover-viewer').checked = ui.showCoverViewer ?? false;
         document.getElementById('ui-video-info-hover').checked = ui.videoInfoHover ?? true;
         document.getElementById('ui-video-info-hover-ai').checked = ui.videoInfoHoverAi ?? true;
         document.getElementById('ui-video-info-hover-reply').checked = ui.videoInfoHoverReply ?? true;
         document.getElementById('ui-user-info-hover').checked = ui.userInfoHover ?? true;
         document.getElementById('ui-video-info-delay').value = ui.videoInfoHoverDelay ?? 500;
+        document.getElementById('ui-show-ip').checked = ui.showIpLocation;
+        document.getElementById('ui-show-cover-viewer').checked = ui.showCoverViewer ?? false;
         
         // 3. 夜间模式渲染与自身主题切换
         const nm = ui.nightMode || { enabled: true, followSystem: true, start: "18:00", end: "06:00" };
@@ -131,14 +132,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         config.filter.minDuration = parseFloat(document.getElementById('min-duration').value) || 0;
         
         config.ui.layoutOptimization = document.getElementById('ui-layout-opt').checked;
-        config.ui.showIpLocation = document.getElementById('ui-show-ip').checked;
+        config.ui.hideRecommend = document.getElementById('ui-hide-recommend').checked;
         config.ui.hideHotSearch = document.getElementById('ui-hide-hot-search').checked;
-        config.ui.showCoverViewer = document.getElementById('ui-show-cover-viewer').checked;
         config.ui.videoInfoHover = document.getElementById('ui-video-info-hover').checked;
         config.ui.videoInfoHoverAi = document.getElementById('ui-video-info-hover-ai').checked;
         config.ui.videoInfoHoverReply = document.getElementById('ui-video-info-hover-reply').checked;
         config.ui.userInfoHover = document.getElementById('ui-user-info-hover').checked;
         config.ui.videoInfoHoverDelay = parseInt(document.getElementById('ui-video-info-delay').value) || 500;
+        config.ui.showIpLocation = document.getElementById('ui-show-ip').checked;
+        config.ui.showCoverViewer = document.getElementById('ui-show-cover-viewer').checked;
         
         const nightModeSelect = document.getElementById('ui-night-mode-select').value;
         config.ui.nightMode = {
@@ -202,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 1. 绑定所有开关与输入框的 Change 事件
         const inputs =[
             'master-switch', 'cleanup-enabled', 'ui-layout-opt', 'ui-show-ip', 
-            'ui-hide-hot-search', 'ui-show-cover-viewer', 
+            'ui-hide-hot-search', 'ui-hide-recommend', 'ui-show-cover-viewer', 
             'ui-video-info-hover', 'ui-video-info-hover-ai', 'ui-video-info-hover-reply', 
             'ui-user-info-hover', 'ui-video-info-delay', 'ui-night-mode-select', 
             'ui-night-start', 'ui-night-end', 'min-duration'
