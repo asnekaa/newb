@@ -1,15 +1,9 @@
-/**
- * ==========================================
- * 配置管理器 (ConfigManager)
- * 负责本地配置的加载、保存，以及云端同步与本地导入导出
- * ==========================================
- */
 class ConfigManager {
     constructor() {
         this.configKey = "newb_settings_v1";
         this.cloudKey = "newb_cloud_sync";
         
-        // 默认配置模板，确保新旧版本字段兼容
+        // 默认配置模板
         this.defaultConfig = {
             version: Date.now(),
             masterSwitch: true,
@@ -20,29 +14,28 @@ class ConfigManager {
             },
             filter: {
                 enabled: true,
+                minDuration: 0,
                 titleKeywords: [],
                 upKeywords:[],
                 sectionKeywords: [],
-                tagKeywords:[],
-                minDuration: 0
+                tagKeywords:[]
             },
             ui: {
-                layoutOptimization: true,
-                showIpLocation: false,
-                hidePinnedAd: true,
-                videoInfoHover: true,
-                videoInfoHoverAi: true,
-                videoInfoHoverReply: true,
-                userInfoHover: true,
-                videoInfoHoverDelay: 500,
-                hideHotSearch: true,
-                showCoverViewer: false,
                 nightMode: {
                     enabled: true,
                     followSystem: true,
                     start: "18:30",
                     end: "06:00"
-                }
+                },
+                layoutOptimization: true,
+                hideHotSearch: true,
+                videoInfoHover: true,
+                videoInfoHoverAi: true,
+                videoInfoHoverReply: true,
+                userInfoHover: true,
+                videoInfoHoverDelay: 500,
+                showIpLocation: false,
+                showCoverViewer: false
             }
         };
     }
@@ -58,22 +51,24 @@ class ConfigManager {
 
         if (!savedCfg) return defaultCfg;
 
-        // 深度合并策略：保留用户设置，补充新增的默认字段
-        const mergedConfig = {
-            ...defaultCfg,
-            ...savedCfg,
-            cleanup: { ...defaultCfg.cleanup, ...(savedCfg.cleanup || {}) },
-            filter: { ...defaultCfg.filter, ...(savedCfg.filter || {}) },
-            ui: {
-                ...defaultCfg.ui,
-                ...(savedCfg.ui || {}),
-                nightMode: { ...defaultCfg.ui.nightMode, ...(savedCfg.ui?.nightMode || {}) }
-            },
-            version: savedCfg.version || defaultCfg.version
+        const mergeValidKeys = (base, target) => {
+            const result = { ...base };
+            for (const key in target) {
+                if (Object.prototype.hasOwnProperty.call(base, key)) {
+                    if (typeof target[key] === 'object' && target[key] !== null && !Array.isArray(target[key])) {
+                        result[key] = mergeValidKeys(base[key], target[key]);
+                    } else {
+                        result[key] = target[key];
+                    }
+                }
+            }
+            return result;
         };
 
-        // 清理已废弃的旧版本字段，防止幽灵数据残留并被导出
-        delete mergedConfig.ui.optimizeCdn;
+        const mergedConfig = mergeValidKeys(defaultCfg, savedCfg);
+        
+        // 独立处理版本号逻辑
+        mergedConfig.version = savedCfg.version || defaultCfg.version;
 
         return mergedConfig;
     }
