@@ -375,9 +375,10 @@
     .right-container .recommend-list-v1,
     #reco_list,
     .rec-list.floor-single-card,
-    [class*="ending-related"],
-    [class*="recommend"],
-    [class*="related-video"] {
+    /* [修复] 将模糊匹配严格限制在播放页的右侧容器与播放器内部，彻底防止误杀首页推荐流 */
+    .right-container [class*="recommend"],
+    .right-container [class*="related-video"],
+    #bilibili-player[class*="ending-related"] {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -385,10 +386,9 @@
         overflow: hidden !important;
     }
 
-    /* 隐藏首页换一换按钮 */
-    button.roll-btn,
-    button.primary-btn.roll-btn,
-    .roll-btn {
+    /* 隐藏首页换一换按钮 (限定在首页容器内) */
+    .bili-feed4 .roll-btn,
+    .bili-feed4 .primary-btn.roll-btn {
         display: none !important;
     }
 }
