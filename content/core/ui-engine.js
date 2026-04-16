@@ -59,6 +59,7 @@ class UIEngine {
         const isSpacePage = location.hostname === 'space.bilibili.com';
         
         root.classList.toggle(this.namespaceClass, isLayoutEnabled && !isSpacePage);
+        root.classList.toggle('newb-layout-common', isLayoutEnabled);
         root.classList.toggle('newb-hide-hot-search', isHideHotSearch);
         root.classList.toggle('newb-hide-recommend', isHideRecommend);
         root.classList.toggle('newb-hide-home-feed', isHideHomeFeed);
