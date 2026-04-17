@@ -12,13 +12,16 @@
     }
 
     /* 修复搜索页顶栏 (Header) 为白色断层的问题 */
-    body:has(.search-page-wrapper) #biliMainHeader .bili-header__bar {
+    body:has(.search-layout, .search-page-wrapper) .bili-header__bar,
+    body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar {
         background-color: #E4F1F9 !important;
         box-shadow: none !important;
+        border-bottom: none !important;
     }
 
     /* 搜索页顶栏吸顶时的毛玻璃效果 */
-    body:has(.search-page-wrapper) #biliMainHeader .bili-header__bar.slide-down {
+    body:has(.search-layout, .search-page-wrapper) .bili-header__bar.slide-down,
+    body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar.slide-down {
         background-color: rgba(240, 247, 252, 0.9) !important;
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 16px rgba(0, 174, 236, 0.15) !important;

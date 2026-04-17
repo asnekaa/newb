@@ -98,6 +98,8 @@
 
     /* --- 4. 顶栏 Dark♂ 化 --- */
     #biliMainHeader .bili-header__bar,
+    body:has(.search-layout, .search-page-wrapper) .bili-header__bar,
+    body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar,
     .bili-feed4>.bili-header.large-header>.bili-header__bar.slide-down {
         background-color: #111820 !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
