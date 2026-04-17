@@ -15,11 +15,14 @@
     body:has(.search-layout, .search-page-wrapper) .bili-header__bar,
     body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar {
         background-color: #E4F1F9 !important;
-        box-shadow: none !important;
+        /* 移除 none，赋予与首页一致的微弱阴影，消除视觉扁平感 */
+        box-shadow: 0 2px 8px rgba(0, 174, 236, 0.08) !important;
         border-bottom: none !important;
     }
 
-    /* 搜索页顶栏吸顶时的毛玻璃效果 */
+    /* 搜索页顶栏吸顶时的毛玻璃效果 (增加对 .fixed-header 滚动状态的绝对拦截) */
+    body:has(.search-layout, .search-page-wrapper) .bili-header.fixed-header .bili-header__bar,
+    body:has(.search-layout, .search-page-wrapper) .bili-header.fixed-header .bili-header-m__bar,
     body:has(.search-layout, .search-page-wrapper) .bili-header__bar.slide-down,
     body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar.slide-down {
         background-color: rgba(240, 247, 252, 0.9) !important;
