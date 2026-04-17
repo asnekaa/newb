@@ -25,6 +25,17 @@ class FilterEngine {
     }
 
     /**
+     * 将视频时长字符串转换为分钟数 (支持 MM:SS 与 HH:MM:SS)
+     */
+    parseDuration(str) {
+        if (typeof str !== 'string') return 0;
+        const parts = str.trim().split(':').map(Number);
+        if (parts.some(isNaN)) return 0;
+        const totalSeconds = parts.reduce((acc, val) => acc * 60 + val, 0);
+        return totalSeconds / 60;
+    }
+
+    /**
      * 更新过滤规则配置
      * @param {Object} config - 全局配置对象
      */
@@ -168,7 +179,7 @@ class FilterEngine {
             const durationEl = card.querySelector('.bili-video-card__stats__duration, .duration, .bpx-player-homepage-time-label-total-time');
             if (durationEl) {
                 const durationText = durationEl.textContent.trim().replace(/^时长[:：]?\s*/, '');
-                if (window.newbUtils.parseDuration(durationText) < this.config.minDuration) {
+                if (this.parseDuration(durationText) < this.config.minDuration) {
                     return this.removeCard(card, title, up, durationText, '时长', videoUrl, upUrl);
                 }
             }
@@ -226,5 +237,4 @@ class FilterEngine {
     }
 }
 
-// 挂载至全局 window 对象
 window.newbFilter = new FilterEngine();

@@ -8,7 +8,7 @@
   "author": "ASneka",
   
   "icons": {
-    "128": "assets/icons/icon.png"
+    "128": "assets/icon.png"
   },
 
   "permissions":[
@@ -22,7 +22,7 @@
 
   "action": {
     "default_icon": {
-      "128": "assets/icons/icon.png"
+      "128": "assets/icon.png"
     },
     "default_title": "newB",
     "default_popup": "popup/popup.html"
@@ -30,7 +30,7 @@
   
   "web_accessible_resources": [
     {
-      "resources":["assets/icons/bililv.svg"],
+      "resources":["assets/bililv.svg"],
       "matches": ["*://*.bilibili.com/*"]
     }
   ],
@@ -39,10 +39,17 @@
     {
       "matches": ["*://*.bilibili.com/*"],
       "css":[
-        "assets/css/base.css",
-        "assets/css/video-info-hover.css",
-        "assets/css/user-info-hover.css",
-        "assets/css/layout-optimizer.css"
+        "styles/layout/global.css",
+        "styles/layout/header.css",
+        "styles/layout/home.css",
+        "styles/layout/search.css",
+        "styles/layout/video.css",
+        "styles/hide-home-feed.css",
+        "styles/hide-hot-search.css",
+        "styles/hide-recommend.css",
+        "styles/user-info-hover.css",
+        "styles/video-info-hover.css",
+        "styles/night-mode.css"
       ],
       "js":[
         "common/utils.js",
@@ -61,8 +68,7 @@
     {
       "matches": ["*://*.bilibili.com/*"],
       "js":[
-        "inject/web-components-patch.js",
-        "inject/network-interceptor.js" 
+        "inject/main-world-patch.js"
       ],
       "run_at": "document_start",
       "world": "MAIN"

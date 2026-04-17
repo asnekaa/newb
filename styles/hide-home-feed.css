@@ -1,0 +1,11 @@
+/* 隐藏首页信息流 */
+:root.newb-hide-home-feed {
+
+    /* 隐藏首页视频网格容器及换一换按钮 */
+    .bili-feed4>main>.feed2,
+    .bili-feed4 .recommended-container_floor-aside,
+    .bili-feed4 .roll-btn,
+    .bili-feed4 .primary-btn.roll-btn {
+        display: none !important;
+    }
+}

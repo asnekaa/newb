@@ -124,5 +124,4 @@ class CoverViewerEngine {
     }
 }
 
-// 挂载至全局 window 对象
 window.newbCoverViewer = new CoverViewerEngine();

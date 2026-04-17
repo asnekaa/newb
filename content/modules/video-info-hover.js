@@ -74,6 +74,20 @@ class VideoInfoHoverEngine {
     }
 
     /**
+     * 将秒数格式化为 MM:SS 或 HH:MM:SS
+     */
+    formatSeconds(sec) {
+        if (!sec || isNaN(sec)) return "00:00";
+        sec = Math.floor(sec);
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = sec % 60;
+        const pad = (n) => n.toString().padStart(2, '0');
+        if (h > 0) return `${pad(h)}:${pad(m)}:${pad(s)}`;
+        return `${pad(m)}:${pad(s)}`;
+    }
+
+    /**
      * 格式化时间戳为标准日期字符串
      * @param {number} timestamp - 秒级时间戳
      * @returns {string} 格式化后的时间 (例: 2023-08-01 12:30:00)
@@ -99,7 +113,7 @@ class VideoInfoHoverEngine {
             
         const timeStr = this.formatDate(view.pubdate);
         const upName = view.owner?.name || '未知UP';
-        const { formatNum, formatSeconds } = window.newbUtils;
+        const { formatNum } = window.newbUtils;
 
         // --- 1. 构建 AI 总结 HTML ---
         let aiHtml = '';
@@ -115,7 +129,7 @@ class VideoInfoHoverEngine {
                             <div class="newb-ai-sec-title">${sec.title}</div>
                             ${sec.part_outline.map(part => `
                                 <div class="newb-ai-part">
-                                    <span class="newb-ai-time" data-time="${part.timestamp}">${formatSeconds(part.timestamp)}</span>
+                                    <span class="newb-ai-time" data-time="${part.timestamp}">${this.formatSeconds(part.timestamp)}</span>
                                     <span class="newb-ai-content">${part.content}</span>
                                 </div>
                             `).join('')}
@@ -362,5 +376,4 @@ class VideoInfoHoverEngine {
     }
 }
 
-// 挂载至全局 window 对象
 window.newbVideoInfoHover = new VideoInfoHoverEngine();

@@ -98,7 +98,7 @@ class UserInfoHoverEngine {
         }
         const nameStyle = nameColor ? `style="color: ${nameColor};"` : '';
         
-        const lvSvgUrl = chrome.runtime.getURL('assets/icons/bililv.svg');
+        const lvSvgUrl = chrome.runtime.getURL('assets/bililv.svg');
         const levelHtml = `<span class="newb-u-level-wrap"><img class="newb-u-level-img" src="${lvSvgUrl}" style="top: -${level * 12}px;"></span>`;
 
                 let verifyHtml = '';
@@ -335,5 +335,4 @@ class UserInfoHoverEngine {
     }
 }
 
-// 挂载至全局 window 对象
 window.newbUserInfoHover = new UserInfoHoverEngine();

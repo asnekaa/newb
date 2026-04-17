@@ -1,7 +1,3 @@
-/**
- * 纯 JS 实现的 MD5 算法 (无外部依赖)
- * 专用于 B站 Wbi 接口的 w_rid 签名计算
- */
 const biliMD5 = (function () {
     function d(n, t) { var r = (65535 & n) + (65535 & t); return (n >> 16) + (t >> 16) + (r >> 16) << 16 | 65535 & r }
     function f(n, t, r, e, o, u) { return d((u = d(d(t, n), d(e, u))) << o | u >>> 32 - o, r) }
@@ -99,7 +95,7 @@ class BiliAPI {
      * @param {string} bvid - 视频的 BV 号
      * @returns {Promise<Object>} 视频详情数据
      */
-        async fetchVideoInfo(bvid) {
+    async fetchVideoInfo(bvid) {
         const keys = await this.getWbiKeys();
         if (!keys) throw new Error("Wbi keys fetch failed");
         
@@ -230,5 +226,4 @@ class BiliAPI {
     }
 }
 
-// 挂载至全局 window 对象，供其他模块调用
 window.newbAPI = new BiliAPI();

@@ -1,0 +1,60 @@
+:root.newb-optimized-layout {
+
+    /* --- 1. 修复日间模式背景断层 --- */
+    /* 强制覆盖搜索页顶部的白色背景，使其与下方淡蓝色融为一体 */
+    .search-layout,
+    .search-page-wrapper {
+        background-color: #E4F1F9 !important;
+    }
+
+    .search-header {
+        background-color: transparent !important;
+    }
+
+    /* 修复搜索页顶栏 (Header) 为白色断层的问题 */
+    body:has(.search-page-wrapper) #biliMainHeader .bili-header__bar {
+        background-color: #E4F1F9 !important;
+        box-shadow: none !important;
+    }
+
+    /* 搜索页顶栏吸顶时的毛玻璃效果 */
+    body:has(.search-page-wrapper) #biliMainHeader .bili-header__bar.slide-down {
+        background-color: rgba(240, 247, 252, 0.9) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 16px rgba(0, 174, 236, 0.15) !important;
+    }
+
+    /* --- 2. 搜索结果视频卡片美化 (同步首页卡片风格) --- */
+    /* 针对搜索页特有的 .video-list-item 和新版搜索卡片结构 */
+    .video-list-item,
+    .search-all-list .bili-video-card__wrap,
+    .search-page-video-card {
+        background-color: #F0F7FC !important;
+        box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1) !important;
+        border-radius: 13px !important;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0 !important;
+        /* 清除原生内边距 */
+    }
+
+    /* 卡片悬浮微动效 */
+    .video-list-item:hover,
+    .search-all-list .bili-video-card__wrap:hover,
+    .search-page-video-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25) !important;
+        background-color: #E8F4FD !important;
+        transform: translateY(-2px);
+    }
+
+    /* 修复搜索卡片内部图片圆角溢出问题 */
+    .video-list-item .img-anchor,
+    .video-list-item .v-img {
+        border-radius: 13px 13px 0 0 !important;
+    }
+
+    /* 调整卡片内部文本区域的边距，使其不贴边 */
+    .video-list-item .info {
+        padding: 10px !important;
+    }
+}

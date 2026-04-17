@@ -5,7 +5,6 @@
 
     /**
      * 解析当前页面路由上下文
-     * @returns {Object} 包含页面类型及是否需要运行过滤引擎的标识
      */
     const getContext = () => {
         const path = location.pathname;
@@ -17,7 +16,6 @@
 
     /**
      * 核心执行逻辑：调度清理与过滤引擎
-     * @param {Object} config - 当前最新配置
      */
     const executeEngines = (config) => {
         const { shouldRunFilter } = getContext();
@@ -51,7 +49,7 @@
         // 1. 初始化 UI 引擎 (同步执行以防页面闪烁)
         window.newbUIEngine?.update(activeConfig);
 
-        // 2. 定时轮询夜间模式状态 (每分钟检查一次时间区间)
+        // 2. 定时轮询 Dark♂ 模式状态 (每分钟检查一次时间区间)
         setInterval(async () => {
             activeConfig = await window.newbConfigManager.loadConfig();
             window.newbUIEngine?.update(activeConfig);
@@ -116,10 +114,6 @@
             }
         }
     });
-
-    // ==========================================
-    // 启动入口
-    // ==========================================
     
     // 优先利用缓存配置极速初始化 UI，防止深色模式闪屏
     window.newbConfigManager.loadConfig().then(cfg => window.newbUIEngine?.update(cfg));

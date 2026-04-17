@@ -3,7 +3,6 @@ class ConfigManager {
         this.configKey = "newb_settings_v1";
         this.cloudKey = "newb_cloud_sync";
         
-        // 默认配置模板
         this.defaultConfig = {
             version: Date.now(),
             masterSwitch: true,
@@ -28,9 +27,9 @@ class ConfigManager {
                     end: "06:00"
                 },
                 layoutOptimization: true,
+                hideHotSearch: true,
                 hideRecommend: false,
                 hideHomeFeed: false, 
-                hideHotSearch: true,
                 videoInfoHover: true,
                 videoInfoHoverAi: true,
                 videoInfoHoverReply: true,
@@ -163,5 +162,4 @@ class ConfigManager {
     }
 }
 
-// 挂载至全局 window 对象，供其他模块调用
 window.newbConfigManager = new ConfigManager();

@@ -1,12 +1,12 @@
 class UIEngine {
     constructor() {
         // 核心状态标识与存储键名
-        this.namespaceClass = 'newb-optimized-layout';
         this.nightModeClass = 'newb-night-mode';
+        this.namespaceClass = 'newb-optimized-layout';
         this.storageKeyLayout = 'newb_layout_opt';
         this.storageKeyIp = 'newb_show_ip';
         
-        this.currentNightModeConfig = null; // 缓存夜间模式配置
+        this.currentNightModeConfig = null; // 缓存 Dark♂ 模式配置
         this.systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
         
         // 监听系统主题变化，实现无缝实时切换
@@ -42,11 +42,11 @@ class UIEngine {
         const uiCfg = config.ui || {};
         
         const isLayoutEnabled = isMasterOn && !!uiCfg.layoutOptimization;
-        const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
         const isHideHotSearch = isMasterOn && !!uiCfg.hideHotSearch;
         const isHideRecommend = isMasterOn && !!uiCfg.hideRecommend;
         const isHideHomeFeed = isMasterOn && !!uiCfg.hideHomeFeed;
         const isUserInfoHover = isMasterOn && (uiCfg.userInfoHover ?? true);
+        const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
         const nm = isMasterOn ? (uiCfg.nightMode || { enabled: false }) : { enabled: false };
         
         // 2. 跨域/跨页面状态同步 (供 inject 脚本读取)
@@ -65,7 +65,7 @@ class UIEngine {
         root.classList.toggle('newb-hide-home-feed', isHideHomeFeed);
         root.classList.toggle('newb-user-info-hover-enabled', isUserInfoHover);
 
-        // 4. 夜间模式调度与主题锁定
+        // 4.  Dark♂ 模式调度与主题锁定
         this.currentNightModeConfig = nm;
         
         let isDarkTime = false;
@@ -77,7 +77,7 @@ class UIEngine {
     }
 
     /**
-     * 应用夜间模式状态并锁定主题
+     * 应用 Dark♂ 模式状态并锁定主题
      * @param {boolean} isDark - 是否开启深色模式
      */
     applyNightMode(isDark) {
@@ -161,10 +161,10 @@ class UIEngine {
     }
 
     /**
-     * 判断当前时间是否在指定的夜间模式时段内 (支持跨天计算)
+     * 判断当前时间是否在指定的 Dark♂ 模式时段内 (支持跨天计算)
      * @param {string} startStr - 开始时间 (例: "18:00")
      * @param {string} endStr - 结束时间 (例: "06:00")
-     * @returns {boolean} 是否处于夜间模式时段
+     * @returns {boolean} 是否处于 Dark♂ 模式时段
      */
     isTimeInRange(startStr, endStr) {
         if (!startStr || !endStr) return false;
@@ -185,5 +185,4 @@ class UIEngine {
     }
 }
 
-// 挂载至全局 window 对象，供核心入口调用
 window.newbUIEngine = new UIEngine();

@@ -188,5 +188,4 @@ class CleanupEngine {
     }
 }
 
-// 挂载至全局 window 对象
 window.newbCleanup = new CleanupEngine();

@@ -1,0 +1,377 @@
+/* 屏蔽 B 站原生 UP 主悬浮窗 */
+:root.newb-user-info-hover-enabled .usercard-wrap,
+:root.newb-user-info-hover-enabled .bili-user-profile-view,
+:root.newb-user-info-hover-enabled .user-profile-card,
+:root.newb-user-info-hover-enabled .user-card-m-exp {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#newb-user-info-card {
+    position: fixed;
+    z-index: 999999;
+    width: 340px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+    color: #18191c;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    pointer-events: none;
+    user-select: text;
+    /* 保持与视频悬浮窗完全一致的微弹簧曲线 */
+    transition: opacity 0.2s ease-out, transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+#newb-user-info-card.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* 顶部头图 */
+.newb-u-banner {
+    height: 85px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px 12px 0 0;
+    background-color: #e3e5e7;
+}
+
+/* 内容区 */
+.newb-u-content {
+    padding: 0 16px 16px 16px;
+}
+
+/* 头像与操作按钮行 */
+.newb-u-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: -20px;
+    margin-bottom: 12px;
+}
+
+.newb-u-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #f1f2f3;
+    object-fit: cover;
+}
+
+.newb-u-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.newb-u-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+/* 按钮状态样式 */
+.btn-follow {
+    background: #00aeec;
+    color: #fff;
+}
+
+.btn-follow:hover {
+    background: #0098d4;
+}
+
+.btn-followed {
+    background: #e3e5e7;
+    color: #61666d;
+}
+
+.btn-followed:hover {
+    background: #d3d5d7;
+}
+
+.btn-msg {
+    background: #fff;
+    color: #61666d;
+    border: 1px solid #e3e5e7;
+}
+
+.btn-msg:hover {
+    border-color: #00aeec;
+    color: #00aeec;
+}
+
+.btn-block {
+    background: #fff;
+    color: #fb7299;
+    border: 1px solid #ffd8e8;
+}
+
+.btn-block:hover {
+    background: #fff0f6;
+}
+
+.btn-blocked {
+    background: #fb7299;
+    color: #fff;
+}
+
+.btn-disabled {
+    background: #f1f2f3;
+    color: #c0c9d4;
+    cursor: not-allowed;
+}
+
+/* 名字与等级行 */
+.newb-u-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.newb-u-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #18191c;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.newb-u-sex {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 等级 Icon (本地 SVG Sprite) */
+.newb-u-level-wrap {
+    display: inline-block;
+    height: 12px;
+    width: 28px;
+    /* 增加宽度确保显示完整 */
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    margin-left: 2px;
+    transform: scale(1.1);
+    transform-origin: left center;
+}
+
+.newb-u-level-img {
+    position: absolute;
+    height: 132px;
+    width: 28px;
+    left: 0;
+    display: block;
+}
+
+/* 大会员标签 */
+.newb-u-vip {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 0 4px;
+    border-radius: 4px;
+    line-height: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* 认证信息 */
+.newb-u-verify {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+/* 数据统计网格 */
+.newb-u-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.newb-u-stats div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #9499a0;
+}
+
+.newb-u-stats b {
+    color: #18191c;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* 个人简介 */
+.newb-u-sign {
+    font-size: 12px;
+    color: #61666d;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    background: #f6f7f8;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+/* 真实内容淡入容器 */
+.newb-hover-content {
+    animation: newb-fade-in 0.3s ease-out forwards;
+}
+
+/* 骨架屏基础动画 */
+.newb-skeleton {
+    background: linear-gradient(90deg, #f2f2f3 25%, #e3e5e7 37%, #f2f2f3 63%);
+    background-size: 400% 100%;
+    animation: newb-skeleton-loading 1.4s ease infinite;
+}
+
+/* UP主专属骨架屏结构 (高度与真实内容高度近似，防止布局抖动) */
+.newb-u-skel-banner {
+    height: 85px;
+    border-radius: 12px 12px 0 0;
+}
+
+.newb-u-skel-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background-color: #f1f2f3;
+}
+
+.newb-u-skel-btn {
+    width: 72px;
+    height: 28px;
+    border-radius: 6px;
+}
+
+.newb-u-skel-name {
+    height: 20px;
+    width: 120px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.newb-u-skel-stat {
+    height: 36px;
+    border-radius: 6px;
+}
+
+/* 动态认证信息骨架屏 */
+.newb-u-skel-verify {
+    height: 14px;
+    width: 160px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.newb-u-skel-verify.show {
+    display: block;
+}
+
+.newb-u-skel-sign {
+    height: 48px;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+
+@keyframes newb-skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes newb-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/*  Dark♂ 模式适配 */
+:root.newb-night-mode #newb-user-info-card {
+    background: rgba(26, 35, 44, 0.98);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+:root.newb-night-mode .newb-u-banner {
+    background-color: #232e3b;
+}
+
+:root.newb-night-mode .newb-u-avatar {
+    border-color: #1a232c;
+    background: #232e3b;
+}
+
+:root.newb-night-mode .newb-u-name {
+    color: #e0e5ea;
+}
+
+:root.newb-night-mode .newb-u-stats b {
+    color: #e0e5ea;
+}
+
+:root.newb-night-mode .newb-u-sign {
+    background: #232e3b;
+    color: #a0abb8;
+}
+
+:root.newb-night-mode .btn-msg {
+    background: #1a232c;
+    border-color: #324052;
+    color: #a0abb8;
+}
+
+:root.newb-night-mode .btn-block {
+    background: #1a232c;
+    border-color: rgba(251, 114, 153, 0.3);
+}
+
+:root.newb-night-mode .btn-followed {
+    background: #232e3b;
+    color: #a0abb8;
+}
+
+:root.newb-night-mode .newb-skeleton {
+    background: linear-gradient(90deg, #232e3b 25%, #324052 37%, #232e3b 63%);
+    background-size: 400% 100%;
+}

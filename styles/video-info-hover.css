@@ -1,0 +1,433 @@
+/* --- 1. 悬浮窗基础容器 --- */
+#newb-video-info-card {
+  /* 定位与层级 */
+  position: fixed;
+  z-index: 999999;
+  width: 380px;
+  padding: 16px;
+
+  /* 视觉材质 (毛玻璃与阴影) */
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* 字体与排版 */
+  color: #18191c;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* 初始隐藏状态与平滑过渡 */
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  pointer-events: none;
+  user-select: text;
+  /* 升级为微弹簧物理曲线，提升弹出时的灵动感 */
+  transition: opacity 0.2s ease-out, transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+
+  /* 激活显示状态 */
+  &.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* --- 2. 骨架屏加载动画 (Skeleton UI) --- */
+  .newb-skeleton {
+    background: linear-gradient(90deg, #f2f2f3 25%, #e3e5e7 37%, #f2f2f3 63%);
+    background-size: 400% 100%;
+    animation: newb-skeleton-loading 1.4s ease infinite;
+    border-radius: 4px;
+  }
+
+  .newb-skel-title {
+    height: 20px;
+    width: 85%;
+    margin-bottom: 12px;
+  }
+
+  .newb-skel-desc {
+    height: 14px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  /* 动态多行标题骨架屏 */
+  .newb-skel-title.is-two-lines {
+    height: 40px;
+  }
+
+  .newb-skel-desc.short {
+    width: 65%;
+    margin-bottom: 16px;
+  }
+
+  .newb-skel-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .newb-skel-tag {
+    height: 20px;
+    width: 48px;
+    border-radius: 4px;
+  }
+
+  .newb-skel-stats {
+    height: 48px;
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  /* --- 3. 真实内容渲染 (Content Rendering) --- */
+  .newb-hover-content {
+    animation: newb-fade-in 0.3s ease-out forwards;
+  }
+
+  /* 文本排版：标题、元数据、简介 */
+  .newb-hover-title {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.4;
+    color: #18191c;
+    margin-bottom: 4px;
+    cursor: text;
+    word-break: break-all;
+  }
+
+  .newb-hover-meta {
+    font-size: 12px;
+    color: #9499a0;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .newb-hover-desc {
+    font-size: 13px;
+    color: #61666d;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    /* WebKit 私有属性 (兼容老版本) */
+    line-clamp: 4;
+    /* W3C 标准属性 (消除编辑器警告) */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: text;
+
+    /* 展开完整简介 */
+    &.is-expanded {
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      display: block;
+    }
+  }
+
+  /* 展开/收起交互按钮 */
+  .newb-expand-btn {
+    font-size: 12px;
+    color: #00aeec;
+    cursor: pointer;
+    text-align: right;
+    margin-bottom: 8px;
+    user-select: none;
+
+    &:hover {
+      color: #008ac5;
+    }
+  }
+
+  /* 标签组：分区与自定义标签 */
+  .newb-hover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+
+  .newb-hover-type {
+    background: #fff0f6;
+    color: #fb7299;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 1px solid #ffd8e8;
+  }
+
+  .newb-tag {
+    background: #f1f2f3;
+    color: #61666d;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid #e3e5e7;
+  }
+
+  /* 数据统计网格 (播放、弹幕、点赞等) */
+  .newb-hover-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    div {
+      background: #f6f7f8;
+      padding: 8px 4px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+      color: #9499a0;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+
+      b {
+        color: #18191c;
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* --- AI 总结与热评样式 --- */
+  .newb-hover-ai,
+  .newb-hover-reply {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f6f7f8;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #61666d;
+  }
+
+  .newb-hover-ai.empty {
+    color: #9499a0;
+    text-align: center;
+  }
+
+  .newb-ai-header,
+  .newb-reply-header {
+    font-weight: bold;
+    color: #18191c;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .newb-ai-summary {
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .newb-ai-outline {
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .newb-ai-outline::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .newb-ai-outline::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  .newb-ai-sec {
+    margin-bottom: 8px;
+  }
+
+  .newb-ai-sec-title {
+    font-weight: bold;
+    color: #18191c;
+    margin-bottom: 4px;
+    position: relative;
+    padding-left: 10px;
+  }
+
+  .newb-ai-sec-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 4px;
+    height: 4px;
+    background: #00aeec;
+    border-radius: 50%;
+  }
+
+  .newb-ai-part {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+    padding-left: 10px;
+  }
+
+  .newb-ai-time {
+    color: #00aeec;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .newb-ai-content {
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .newb-reply-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #61666d;
+    line-height: 1.5;
+
+    /* 展开完整热评 */
+    &.is-expanded {
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      display: block;
+    }
+  }
+
+  .newb-reply-user {
+    color: #fb7299;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  .newb-skel-ai {
+    height: 80px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 12px;
+  }
+
+  /* 异常状态提示 */
+  .newb-hover-loading,
+  .newb-hover-error {
+    text-align: center;
+    padding: 20px 0;
+    color: #fb7299;
+    font-size: 14px;
+  }
+}
+
+/* --- 4. 关键帧动画定义 (Keyframes) --- */
+@keyframes newb-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes newb-fade-in {
+
+  /* 移除 Y 轴位移，仅保留透明度渐变，消除视觉两段跳的割裂感 */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/*  Dark♂ 模式适配 */
+:root.newb-night-mode #newb-video-info-card {
+  /* 容器 Dark♂ 化 */
+  background: rgba(26, 35, 44, 0.98);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e5ea;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+  /* 文本 Dark♂ 化 */
+  .newb-hover-title {
+    color: #e0e5ea;
+  }
+
+  .newb-hover-meta {
+    color: #8b96a5;
+  }
+
+  .newb-hover-desc {
+    color: #a0abb8;
+  }
+
+  /* 标签 Dark♂ 化 */
+  .newb-hover-type {
+    background: rgba(251, 114, 153, 0.15);
+    color: #fb7299;
+    border-color: rgba(251, 114, 153, 0.3);
+  }
+
+  .newb-tag {
+    background: #232e3b;
+    color: #a0abb8;
+    border-color: #324052;
+  }
+
+  /* 数据网格 Dark♂ 化 */
+  .newb-hover-stats div {
+    background: #232e3b;
+    color: #8b96a5;
+
+    b {
+      color: #e0e5ea;
+    }
+  }
+
+  /* AI 总结与热评 Dark♂ 化 */
+  .newb-hover-ai,
+  .newb-hover-reply {
+    background: #232e3b;
+    color: #a0abb8;
+  }
+
+  .newb-reply-content,
+  .newb-reply-text {
+    color: #a0abb8;
+  }
+
+  .newb-ai-header,
+  .newb-ai-sec-title,
+  .newb-reply-header {
+    color: #e0e5ea;
+  }
+
+  .newb-ai-header svg path[fill="#18191c"] {
+    fill: #e0e5ea;
+  }
+
+  .newb-ai-header svg path[fill="#9499a0"] {
+    fill: #8b96a5;
+  }
+
+  .newb-reply-user {
+    color: #fb7299;
+  }
+
+  /* 骨架屏 Dark♂ 化 */
+  .newb-skeleton {
+    background: linear-gradient(90deg, #232e3b 25%, #324052 37%, #232e3b 63%);
+    background-size: 400% 100%;
+  }
+
+  .newb-skel-ai {
+    background: linear-gradient(90deg, #232e3b 25%, #324052 37%, #232e3b 63%);
+    background-size: 400% 100%;
+  }
+}

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('ui-show-ip').checked = ui.showIpLocation;
         document.getElementById('ui-show-cover-viewer').checked = ui.showCoverViewer ?? false;
         
-        // 3. 夜间模式渲染与自身主题切换
+        // 3.  Dark♂ 模式渲染与自身主题切换
         const nm = ui.nightMode || { enabled: true, followSystem: true, start: "18:00", end: "06:00" };
         
         // 状态映射：优先读取显式保存的 mode，兼容旧版配置
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 : (currentMins >= startMins || currentMins <= endMins);
         };
         
-        // 动态判断 Popup 自身是否需要开启暗黑模式
+        // 动态判断 Popup 自身是否需要开启 Dark♂ 模式
         const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         let isDarkTime = false;
         if (mode === 'on') isDarkTime = true;
@@ -310,6 +310,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
-    // 启动初始化
     init();
 });

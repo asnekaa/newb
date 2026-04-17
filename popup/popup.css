@@ -1,4 +1,4 @@
-/* --- 1. 全局主题变量 (CSS Variables) --- */
+/* --- 1. 全局主题变量 --- */
 :root {
   --bili-blue: #00aeec;    /* B站品牌蓝 */
   --bili-pink: #ff6699;    /* B站品牌粉 */
@@ -8,7 +8,7 @@
   --border: #e3e5e7;       /* 边框与分割线 */
 }
 
-/* --- 2. 基础布局 (Base Layout) --- */
+/* --- 2. 基础布局 --- */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -40,11 +40,9 @@ body {
   &.active {
     display: block;
   }
-
-  /* 确保这里是 block，维持整个页面的原生滚动 */
 }
 
-/* --- 3. 侧边栏导航 (Sidebar Navigation) --- */
+/* --- 3. 侧边栏导航 --- */
 .sidebar {
   width: 130px;
   background: #fff;
@@ -99,7 +97,7 @@ body {
   margin-left: 4px;
 }
 
-/* --- 4. 表单与通用控件 (Forms & Controls) --- */
+/* --- 4. 表单与通用控件 --- */
 .form-group {
   margin-bottom: 12px;
   background: #fff;
@@ -243,7 +241,7 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
   input:checked + .slider::before { transform: translateX(16px); }
 }
 
-/* --- 5. 拦截日志与同步面板 (Logs & Sync) --- */
+/* --- 5. 拦截日志与同步面板 --- */
 .logs-area {
   margin-top: 15px;
   background: #fff;
@@ -306,7 +304,7 @@ code { background: #f1f2f3; padding: 2px 4px; border-radius: 4px; color: var(--b
   .status-msg { margin-top: 10px; font-size: 12px; color: #52c41a; text-align: center; }
 }
 
-/* --- 6. 夜间模式适配 --- */
+/* --- 6.  Dark♂ 模式适配 --- */
 body.dark-mode {
   /* 覆写全局变量 */
   --bg-color: #111820;
@@ -315,18 +313,18 @@ body.dark-mode {
   --border: #232e3b;
   background-color: var(--bg-color);
 
-  /* 容器与面板暗黑化 */
+  /* 容器与面板 Dark♂ 化 */
   .sidebar { background: #1a232c; }
   .form-group, .sync-card, .logs-area { background: #1a232c; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
   .log-header { background: #232e3b; }
   
-  /* 导航高亮暗黑化 */
+  /* 导航高亮 Dark♂ 化 */
   .nav-links li {
     &:hover { background: #232e3b; }
     &.active { background: #232e3b; border-right-color: var(--bili-blue); }
   }
 
-    /* 表单控件暗黑化 */
+    /* 表单控件 Dark♂ 化 */
     input[type="text"],
     input[type="number"],
     input[type="time"],
@@ -352,10 +350,10 @@ body.dark-mode {
       border-color: #324052;
     }
   
-  /* 标签与代码块暗黑化 */
+  /* 标签与代码块 Dark♂ 化 */
   .tag { background: #1a3244; border-color: #1e4b68; color: #5bc0de; }
   code { background: #232e3b; }
   
-  /* 列表分割线暗黑化 */
+  /* 列表分割线 Dark♂ 化 */
   .log-item { border-bottom-color: #232e3b; }
 }
