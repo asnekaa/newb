@@ -34,7 +34,7 @@ class ConfigManager {
                 videoInfoHoverAi: true,
                 videoInfoHoverReply: true,
                 userInfoHover: true,
-                videoInfoHoverDelay: 500,
+                infoHoverDelay: 500,
                 showIpLocation: false,
                 showCoverViewer: false
             }

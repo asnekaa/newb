@@ -24,7 +24,7 @@ class VideoInfoHoverEngine {
         this.config.enabled = isMasterOn && (config.ui?.videoInfoHover ?? true);
         this.config.aiEnabled = isMasterOn && (config.ui?.videoInfoHoverAi ?? true);
         this.config.replyEnabled = isMasterOn && (config.ui?.videoInfoHoverReply ?? true);
-        this.config.delay = config.ui?.videoInfoHoverDelay ?? 500;
+        this.config.delay = config.ui?.infoHoverDelay ?? 500;
         
         if (!this.config.enabled) this.hideCard();
     }

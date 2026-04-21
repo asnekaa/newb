@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('ui-video-info-hover-ai').checked = ui.videoInfoHoverAi ?? true;
         document.getElementById('ui-video-info-hover-reply').checked = ui.videoInfoHoverReply ?? true;
         document.getElementById('ui-user-info-hover').checked = ui.userInfoHover ?? true;
-        document.getElementById('ui-video-info-delay').value = ui.videoInfoHoverDelay ?? 500;
+        document.getElementById('ui-video-info-delay').value = ui.infoHoverDelay ?? 500;
         document.getElementById('ui-show-ip').checked = ui.showIpLocation;
         document.getElementById('ui-show-cover-viewer').checked = ui.showCoverViewer ?? false;
         
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         config.ui.videoInfoHoverAi = document.getElementById('ui-video-info-hover-ai').checked;
         config.ui.videoInfoHoverReply = document.getElementById('ui-video-info-hover-reply').checked;
         config.ui.userInfoHover = document.getElementById('ui-user-info-hover').checked;
-        config.ui.videoInfoHoverDelay = parseInt(document.getElementById('ui-video-info-delay').value) || 500;
+        config.ui.infoHoverDelay = parseInt(document.getElementById('ui-video-info-delay').value) || 500;
         config.ui.showIpLocation = document.getElementById('ui-show-ip').checked;
         config.ui.showCoverViewer = document.getElementById('ui-show-cover-viewer').checked;
         

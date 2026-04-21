@@ -17,7 +17,7 @@ class UserInfoHoverEngine {
     updateConfig(config) {
         const isMasterOn = config.masterSwitch ?? true;
         this.config.enabled = isMasterOn && (config.ui?.userInfoHover ?? true);
-        this.config.delay = config.ui?.videoInfoHoverDelay ?? 500; // 复用悬浮窗延迟配置
+        this.config.delay = config.ui?.infoHoverDelay ?? 500; // 复用悬浮窗延迟配置
         
         if (!this.config.enabled) this.hideCard();
     }
