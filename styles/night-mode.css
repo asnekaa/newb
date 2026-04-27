@@ -290,4 +290,24 @@
     .up-info-container .article-pts {
         color: #8b96a5 !important;
     }
+
+    /* --- 9. 页脚 (Footer) Dark♂ 化 --- */
+    .bili-footer,
+    .international-footer,
+    .bili-main-footer {
+        background-color: #111820 !important;
+        border-top: 1px solid #1a232c !important;
     }
+
+    .bili-footer *,
+    .international-footer *,
+    .bili-main-footer * {
+        color: #61666d !important;
+    }
+
+    .bili-footer a:hover,
+    .international-footer a:hover,
+    .bili-main-footer a:hover {
+        color: #00aeec !important;
+    }
+}
