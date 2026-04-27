@@ -5,13 +5,13 @@
     & body>.desktop-download-tip,
     div.bili-feed4>div.header-channel>div.header-channel-fixed,
     & body>div.adcard,
-    .container>.recommended-swipe,
+    .bili-feed4 .container>.recommended-swipe,
     .is-version8>.recommended-swipe,
     .bili-feed4>.header-channel,
     .is-version8>.bili-live-card,
-    .container>.bili-live-card,
+    .bili-feed4 .container>.bili-live-card,
     .is-version8>.floor-single-card,
-    .container>.floor-single-card {
+    .bili-feed4 .container>.floor-single-card {
         display: none !important;
     }
 
@@ -55,12 +55,12 @@
 
     /* 响应式网格布局重构 */
     .is-version8>*,
-    .container>* {
+    .bili-feed4 .container>* {
         margin: 0 !important;
     }
 
     .is-version8,
-    .container {
+    .bili-feed4 .container {
         row-gap: 1.3rem !important;
         column-gap: 1.5rem !important;
         grid-template-columns: repeat(3, 1fr) !important;
@@ -73,7 +73,7 @@
     @media (min-width: 1140px) and (max-width: 1400px) {
 
         .is-version8,
-        .container {
+        .bili-feed4 .container {
             grid-template-columns: repeat(4, 1fr) !important;
             column-gap: 1.4rem !important;
         }
@@ -82,7 +82,7 @@
     @media (min-width: 1400px) {
 
         .is-version8,
-        .container {
+        .bili-feed4 .container {
             grid-template-columns: repeat(5, 1fr) !important;
             column-gap: 1.3rem !important;
         }
