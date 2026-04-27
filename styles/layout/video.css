@@ -1,402 +1,489 @@
 @keyframes collapseHeight {
-    30% {
-        transform: scale(0.75) translateY(60px) translateX(35px);
-    }
+  30% {
+    transform: scale(0.75) translateY(60px) translateX(35px);
+  }
 
-    40% {
-        max-height: 0;
-        margin-bottom: 0;
-        transform: scale(0.75) translateY(70px) translateX(35px);
-        padding: 0;
-    }
+  40% {
+    max-height: 0;
+    margin-bottom: 0;
+    transform: scale(0.75) translateY(70px) translateX(35px);
+    padding: 0;
+  }
 
-    100% {
-        max-height: 0;
-        margin-bottom: 0;
-        transform: scale(0.5) translateY(80px) translateX(40px);
-        padding: 0;
-    }
+  100% {
+    max-height: 0;
+    margin-bottom: 0;
+    transform: scale(0.5) translateY(80px) translateX(40px);
+    padding: 0;
+  }
 }
 
 @keyframes blink-color {
+  0%,
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
-    0%,
-    100% {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
+  30% {
+    background-color: #000;
+  }
 
-    30% {
-        background-color: #000;
-    }
-
-    60% {
-        background-color: #ffffff;
-    }
+  60% {
+    background-color: #ffffff;
+  }
 }
 
 :root.newb-optimized-layout {
+  /* 右侧推荐列表卡片化 */
+  .next-play,
+  .rec-list {
+    position: relative;
 
-    /* 右侧推荐列表卡片化 */
-    .next-play,
-    .rec-list {
-        position: relative;
-
-        >.video-page-special-card-small {
-            display: none;
-        }
-
-        &>* {
-            z-index: auto;
-        }
-
-        &>div:has(> .card-box) {
-            margin-bottom: 10px;
-            max-height: 415px;
-            overflow: hidden;
-            padding: 3px;
-        }
-
-        &>.blocked {
-            animation: .7s cubic-bezier(0.16, 0.48, 0.58, 1) 0s 1 normal forwards running collapseHeight;
-            transform-origin: center;
-            z-index: -1;
-        }
-
-        &>div>.card-box {
-            box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1);
-            background-color: #F0F7FC;
-            padding: 5px;
-            border-radius: 10px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            user-select: none;
-
-            &:hover {
-                background-color: #E8F4FD;
-                box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25);
-                transform: translateY(-2px);
-            }
-
-            >.info {
-
-                >.upname,
-                >.playinfo {
-                    width: fit-content;
-                }
-
-                >.upname>a>.name {
-                    width: fit-content;
-                }
-            }
-
-            >.pic-box>.watch-later-video {
-                width: 25px;
-                height: 25px;
-            }
-        }
+    > .video-page-special-card-small {
+      display: none;
     }
 
-    div[class^="recommend-list"] {
-        >.next-play {
-            >.rec-title {
-                margin-bottom: 8px;
-            }
-
-            >.split-line {
-                display: none;
-            }
-        }
-
-        >.rec-list {
-            margin-top: 0 !important;
-        }
+    & > * {
+      z-index: auto;
     }
 
-    /* 播放器控制栏精简 */
-    #bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-video-area>.bpx-player-control-wrap>.bpx-player-control-entity>.bpx-player-control-bottom>.bpx-player-control-bottom-right>.bpx-player-ctrl-wide {
+    & > div:has(> .card-box) {
+      margin-bottom: 10px;
+      max-height: 415px;
+      overflow: hidden;
+      padding: 3px;
+    }
+
+    & > .blocked {
+      animation: 0.7s cubic-bezier(0.16, 0.48, 0.58, 1) 0s 1 normal forwards
+        running collapseHeight;
+      transform-origin: center;
+      z-index: -1;
+    }
+
+    & > div > .card-box {
+      box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1);
+      background-color: #f0f7fc;
+      padding: 5px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      user-select: none;
+
+      &:hover {
+        background-color: #e8f4fd;
+        box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25);
+        transform: translateY(-2px);
+      }
+
+      > .info {
+        > .upname,
+        > .playinfo {
+          width: fit-content;
+        }
+
+        > .upname > a > .name {
+          width: fit-content;
+        }
+      }
+
+      > .pic-box > .watch-later-video {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+
+  div[class^="recommend-list"] {
+    > .next-play {
+      > .rec-title {
+        margin-bottom: 8px;
+      }
+
+      > .split-line {
         display: none;
+      }
     }
 
-    #bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-video-area>.bpx-player-ending-wrap>.bpx-player-ending-panel>div>div {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+    > .rec-list {
+      margin-top: 0 !important;
+    }
+  }
 
-        >.bpx-player-ending-related {
-            display: none;
+  /* 播放器控制栏精简 */
+  #bilibili-player
+    > div
+    > div
+    > .bpx-player-primary-area
+    > .bpx-player-video-area
+    > .bpx-player-control-wrap
+    > .bpx-player-control-entity
+    > .bpx-player-control-bottom
+    > .bpx-player-control-bottom-right
+    > .bpx-player-ctrl-wide {
+    display: none;
+  }
+
+  #bilibili-player
+    > div
+    > div
+    > .bpx-player-primary-area
+    > .bpx-player-video-area
+    > .bpx-player-ending-wrap
+    > .bpx-player-ending-panel
+    > div
+    > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    > .bpx-player-ending-related {
+      display: none;
+    }
+  }
+
+  /* 拦截UP主名称闪烁提示 */
+  #mirror-vdcon
+    > .right-container
+    > div
+    > .up-panel-container
+    > .up-info-container
+    > .up-info--right
+    > .up-info__detail
+    > div
+    > .up-detail-top
+    > a.up-name.blocked::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    animation: blink-color 2.5s ease-in-out 1 forwards;
+  }
+
+  /* 播放页背景与弹幕框适配 */
+  #app > #mirror-vdcon,
+  #biliMainHeader > .bili-header.fixed-header > .bili-header__bar,
+  #danmukuBox > div > div > div > div > .bui-area,
+  .bpx-player-sending-area,
+  .bpx-player-sending-area .bpx-player-sending-bar,
+  #danmukuBox
+    > div
+    > div
+    > div
+    > .bpx-player-collapse
+    > .bui-area
+    > .bui-collapse-wrap.bui-collapse-wrap-folded {
+    background-color: #e4f1f9;
+  }
+
+  .bpx-player-video-inputbar {
+    background-color: #f0f7fc !important;
+  }
+
+  #danmukuBox {
+    margin-top: 0 !important;
+
+    > .high-level-fake-danmuku,
+    > div > div {
+      background-color: #f1f2f3;
+      border-radius: 6px;
+      overflow: hidden;
+
+      > .bpx-player-auxiliary
+        > div
+        > div
+        > div
+        > .bui-collapse-body
+        > div
+        > .bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status
+        > .bpx-player-dm-btn-footer
+        > div {
+        background-color: white;
+      }
+
+      > div > div > div > div > .bui-collapse-header {
+        border-radius: 0;
+      }
+
+      > .bui-collapse-body
+        > div
+        > .bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status
+        > .bpx-player-dm-btn-footer {
+        background-color: rgb(228, 236, 243);
+
+        > .bpx-player-dm-btn-history {
+          border-radius: 0;
         }
+      }
+    }
+  }
+
+  /* 关灯模式 (Light-off) 适配 */
+  #bilibili-player
+    > div
+    > div
+    > .bpx-player-primary-area
+    > .bpx-player-video-area:has(
+      .bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark
+        > div
+        > input:checked
+    ) {
+    + .bpx-player-sending-area {
+      > div
+        > .bpx-player-dm-root
+        > .bpx-player-video-inputbar.focus.bpx-player-checkBox-hide
+        > .bpx-player-dm-btn-send.bui.bui-button
+        > div {
+        background-color: #464646;
+        color: silver;
+      }
+
+      > .bpx-player-sending-bar {
+        background-color: transparent;
+      }
     }
 
-    /* 拦截UP主名称闪烁提示 */
-    #mirror-vdcon>.right-container>div>.up-panel-container>.up-info-container>.up-info--right>.up-info__detail>div>.up-detail-top>a.up-name.blocked::after {
-        content: '';
+    > .bpx-player-control-wrap > .bpx-player-control-entity {
+      > .bpx-player-shadow-progress-area
+        > div
+        > div
+        > div.bpx-player-progress-schedule-current,
+      > .bpx-player-control-top
+        > div
+        > .bpx-player-progress-wrap
+        > div
+        > .bpx-player-progress-schedule-wrap
+        > div
+        > .bpx-player-progress-schedule-current {
+        background-color: #6a6a6a;
+      }
+    }
+  }
+
+  /* 播放器容器与视频信息排版重构 */
+  #bilibili-player > div > div {
+    &:fullscreen > .bpx-player-primary-area > .bpx-player-video-area::after {
+      visibility: hidden;
+    }
+
+    > .bpx-player-primary-area > .bpx-player-video-area {
+      position: relative;
+
+      &:has(
+          .bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark
+            > div
+            > input:checked
+        )::after {
+        background-color: #000000;
+      }
+
+      &::after {
+        content: "";
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 4px;
-        height: 4px;
-        background-color: rgba(0, 0, 0, 0);
-        border-radius: 50%;
-        animation: blink-color 2.5s ease-in-out 1 forwards;
-    }
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.3px;
+        background-color: rgb(228, 236, 243);
+        z-index: 100;
+      }
 
-    /* 播放页背景与弹幕框适配 */
-    #app>#mirror-vdcon,
-    #biliMainHeader>.bili-header.fixed-header>.bili-header__bar,
-    #danmukuBox>div>div>div>div>.bui-area,
-    .bpx-player-sending-area,
-    .bpx-player-sending-area .bpx-player-sending-bar,
-    #danmukuBox>div>div>div>.bpx-player-collapse>.bui-area>.bui-collapse-wrap.bui-collapse-wrap-folded {
-        background-color: #E4F1F9;
-    }
+      > .bpx-player-control-wrap
+        > .bpx-player-control-entity
+        > .bpx-player-shadow-progress-area {
+        height: 2.3px;
 
-    .bpx-player-video-inputbar {
-        background-color: #F0F7FC !important;
-    }
-
-    #danmukuBox {
-        margin-top: 0 !important;
-
-        >.high-level-fake-danmuku,
-        >div>div {
-            background-color: #F1F2F3;
-            border-radius: 6px;
-            overflow: hidden;
-
-            >.bpx-player-auxiliary>div>div>div>.bui-collapse-body>div>.bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status>.bpx-player-dm-btn-footer>div {
-                background-color: white;
-            }
-
-            >div>div>div>div>.bui-collapse-header {
-                border-radius: 0;
-            }
-
-            >.bui-collapse-body>div>.bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status>.bpx-player-dm-btn-footer {
-                background-color: rgb(228, 236, 243);
-
-                >.bpx-player-dm-btn-history {
-                    border-radius: 0;
-                }
-            }
+        > div > .bpx-player-progress-schedule {
+          background-color: transparent;
         }
+      }
     }
+  }
 
-    /* 关灯模式 (Light-off) 适配 */
-    #bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-video-area:has(.bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark > div > input:checked) {
-        +.bpx-player-sending-area {
-            >div>.bpx-player-dm-root>.bpx-player-video-inputbar.focus.bpx-player-checkBox-hide>.bpx-player-dm-btn-send.bui.bui-button>div {
-                background-color: #464646;
-                color: silver;
-            }
-
-            >.bpx-player-sending-bar {
-                background-color: transparent;
-            }
-        }
-
-        >.bpx-player-control-wrap>.bpx-player-control-entity {
-
-            >.bpx-player-shadow-progress-area>div>div>div.bpx-player-progress-schedule-current,
-            >.bpx-player-control-top>div>.bpx-player-progress-wrap>div>.bpx-player-progress-schedule-wrap>div>.bpx-player-progress-schedule-current {
-                background-color: #6a6a6a;
-            }
-        }
+  #bilibili-player
+    > div
+    > div
+    > .bpx-player-primary-area
+    > .bpx-player-sending-area,
+  #bilibili-player
+    > div
+    > div
+    > .bpx-player-primary-area
+    > .bpx-player-sending-area:has(
+      .bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark
+        > div
+        > input:checked
+    ) {
+    &::before {
+      background-color: transparent;
     }
+  }
 
-    /* 播放器容器与视频信息排版重构 */
-    #bilibili-player>div>div {
-        &:fullscreen>.bpx-player-primary-area>.bpx-player-video-area::after {
-            visibility: hidden;
-        }
+  #playerWrap > #bilibili-player-placeholder {
+    box-shadow: none;
+  }
 
-        >.bpx-player-primary-area>.bpx-player-video-area {
-            position: relative;
+  /* 调整视频信息与播放器顺序 (Flex Order) */
+  #mirror-vdcon {
+    > div[class*="left"] {
+      display: flex;
+      flex-direction: column;
 
-            &:has(.bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark > div > input:checked)::after {
-                background-color: #000000;
-            }
-
-            &::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                height: .3px;
-                background-color: rgb(228, 236, 243);
-                z-index: 100;
-            }
-
-            >.bpx-player-control-wrap>.bpx-player-control-entity>.bpx-player-shadow-progress-area {
-                height: 2.3px;
-
-                >div>.bpx-player-progress-schedule {
-                    background-color: transparent;
-                }
-            }
-        }
-    }
-
-    #bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-sending-area,
-    #bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-sending-area:has(.bpx-player-ctrl-setting-checkbox.bpx-player-ctrl-setting-lightoff.bui.bui-checkbox.bui-dark > div > input:checked) {
-        &::before {
-            background-color: transparent;
-        }
-    }
-
-    #playerWrap>#bilibili-player-placeholder {
-        box-shadow: none;
-    }
-
-    /* 调整视频信息与播放器顺序 (Flex Order) */
-    #mirror-vdcon {
-        >div[class*="left"] {
-            display: flex;
-            flex-direction: column;
-
-            >.video-info-container {
-                height: fit-content;
-                order: 2;
-                padding-top: 0;
-
-                >.video-info-meta {
-                    margin-top: 0;
-                }
-            }
-
-            >#playerWrap {
-                order: 1;
-                margin: 1rem 0 0 !important;
-                padding: 0 !important;
-                overflow: hidden;
-
-                >#bilibili-player>div>div>.bpx-player-primary-area>.bpx-player-sending-area>.bpx-player-sending-bar {
-                    padding-left: 0;
-                    padding-right: 0;
-                }
-            }
-
-            >div {
-                order: 3;
-            }
-
-            >.video-toolbar-container {
-                padding: 4px 0;
-                border-bottom: none;
-
-                >.video-toolbar-right>.video-ai-assistant {
-                    >.video-ai-assistant-bg {
-                        &::after {
-                            border: none;
-                        }
-
-                        >span {
-                            display: none;
-                        }
-                    }
-
-                    &:hover>.video-ai-assistant-bg>span {
-                        display: block;
-                    }
-                }
-            }
-        }
-    }
-
-    .video-desc-container {
-        margin: 0 !important;
-        padding: 4px 4px 4px 0;
-        width: fit-content;
-        position: relative;
-    }
-
-    .video-tag-container {
-        border-bottom: none !important;
-        padding: 4px 4px 4px 0 !important;
-        margin: 0 !important;
-
-        >.tag-panel>.tag {
-            margin-bottom: 0 !important;
-
-            &:not(.not-btn-tag)~.not-btn-tag {
-                margin-top: 0.5rem;
-            }
-        }
-    }
-
-    /* 评论区样式微调 */
-    #commentapp {
-        margin-top: 1rem;
-        padding: 1px 0;
-        border-radius: 10px;
-        background: transparent;
-        position: relative;
-
-        &::before {
-            content: "";
-            width: 100%;
-            height: 1px;
-            background: #0000001a;
-            top: -10px;
-            left: 0;
-            position: absolute;
-        }
-    }
-
-    .cover-bottom.fake-danmuku-bar {
-        background-color: transparent !important;
-    }
-
-    /* 右侧UP主面板调整 */
-    #mirror-vdcon>div[class*="right"] .up-panel-container>div.up-info-container {
+      > .video-info-container {
         height: fit-content;
-        padding: 1rem 0;
+        order: 2;
+        padding-top: 0;
 
-        .up-info--left {
-            align-self: center;
+        > .video-info-meta {
+          margin-top: 0;
         }
+      }
 
-        .up-info--right {
-            align-self: flex-start;
+      > #playerWrap {
+        order: 1;
+        margin: 1rem 0 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+
+        > #bilibili-player
+          > div
+          > div
+          > .bpx-player-primary-area
+          > .bpx-player-sending-area
+          > .bpx-player-sending-bar {
+          padding-left: 0;
+          padding-right: 0;
         }
+      }
 
-        >.up-info--right>.up-info__btn-panel>div>.following {
-            background-color: rgb(250 250 250);
-        }
+      > div {
+        order: 3;
+      }
 
-        >.up-info--right>.up-info__detail>div>.up-detail-top>a.up-name {
-            position: relative;
-            margin-right: 8px;
-            padding-right: 5px;
-        }
-    }
+      > .video-toolbar-container {
+        padding: 4px 0;
+        border-bottom: none;
 
-    /* 播放列表页与番剧页优化 */
-    #mirror-vdcon>.playlist-container--right>.recommend-list-container {
-        margin-top: 10px;
-        padding-top: 10px;
-
-        >.recommend-video-card {
-            padding: 3px;
-            margin-bottom: 10px;
-        }
-
-        >div>.card-box {
-            box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1);
-            background-color: #F0F7FC;
-            padding: 5px;
-            border-radius: 10px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-            &:hover {
-                background-color: #E8F4FD;
-                box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25);
-                transform: translateY(-2px);
+        > .video-toolbar-right > .video-ai-assistant {
+          > .video-ai-assistant-bg {
+            &::after {
+              border: none;
             }
+
+            > span {
+              display: none;
+            }
+          }
+
+          &:hover > .video-ai-assistant-bg > span {
+            display: block;
+          }
         }
+      }
+    }
+  }
+
+  .video-desc-container {
+    margin: 0 !important;
+    padding: 4px 4px 4px 0;
+    width: fit-content;
+    position: relative;
+  }
+
+  .video-tag-container {
+    border-bottom: none !important;
+    padding: 4px 4px 4px 0 !important;
+    margin: 0 !important;
+
+    > .tag-panel > .tag {
+      margin-bottom: 0 !important;
+
+      &:not(.not-btn-tag) ~ .not-btn-tag {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  /* 评论区样式微调 */
+  #commentapp {
+    margin-top: 1rem;
+    padding: 1px 0;
+    border-radius: 10px;
+    background: transparent;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: #0000001a;
+      top: -10px;
+      left: 0;
+      position: absolute;
+    }
+  }
+
+  .cover-bottom.fake-danmuku-bar {
+    background-color: transparent !important;
+  }
+
+  /* 右侧UP主面板调整 */
+  #mirror-vdcon
+    > div[class*="right"]
+    .up-panel-container
+    > div.up-info-container {
+    height: fit-content;
+    padding: 1rem 0;
+
+    .up-info--left {
+      align-self: center;
     }
 
-    #comment-body>div>div>.reply-warp>.fixed-reply-box {
-        display: none;
+    .up-info--right {
+      align-self: flex-start;
     }
+
+    > .up-info--right > .up-info__btn-panel > div > .following {
+      background-color: rgb(250 250 250);
+    }
+
+    > .up-info--right > .up-info__detail > div > .up-detail-top > a.up-name {
+      position: relative;
+      margin-right: 8px;
+      padding-right: 5px;
+    }
+  }
+
+  /* 播放列表页与番剧页优化 */
+  #mirror-vdcon > .playlist-container--right > .recommend-list-container {
+    margin-top: 10px;
+    padding-top: 10px;
+
+    > .recommend-video-card {
+      padding: 3px;
+      margin-bottom: 10px;
+    }
+
+    > div > .card-box {
+      box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1);
+      background-color: #f0f7fc;
+      padding: 5px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background-color: #e8f4fd;
+        box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  #comment-body > div > div > .reply-warp > .fixed-reply-box {
+    display: none;
+  }
 }

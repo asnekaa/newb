@@ -6,19 +6,14 @@
   "description": "优化Bilibili使用体验。",
   "default_locale": "zh_CN",
   "author": "ASneka",
-  
+
   "icons": {
     "128": "assets/icon.png"
   },
 
-  "permissions":[
-    "storage"
-  ],
+  "permissions": ["storage"],
 
-  "host_permissions":[
-    "*://*.bilibili.com/*",
-    "*://api.bilibili.com/*"
-  ],
+  "host_permissions": ["*://*.bilibili.com/*", "*://api.bilibili.com/*"],
 
   "action": {
     "default_icon": {
@@ -27,18 +22,18 @@
     "default_title": "newB",
     "default_popup": "popup/popup.html"
   },
-  
+
   "web_accessible_resources": [
     {
-      "resources":["assets/bililv.svg"],
+      "resources": ["assets/bililv.svg"],
       "matches": ["*://*.bilibili.com/*"]
     }
   ],
 
-  "content_scripts":[
+  "content_scripts": [
     {
       "matches": ["*://*.bilibili.com/*"],
-      "css":[
+      "css": [
         "styles/layout/global.css",
         "styles/layout/header.css",
         "styles/layout/home.css",
@@ -51,7 +46,7 @@
         "styles/video-info-hover.css",
         "styles/night-mode.css"
       ],
-      "js":[
+      "js": [
         "common/utils.js",
         "common/bili-api.js",
         "common/config-manager.js",
@@ -67,9 +62,7 @@
     },
     {
       "matches": ["*://*.bilibili.com/*"],
-      "js":[
-        "inject/main-world-patch.js"
-      ],
+      "js": ["inject/main-world-patch.js"],
       "run_at": "document_start",
       "world": "MAIN"
     }

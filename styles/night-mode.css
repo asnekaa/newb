@@ -1,313 +1,355 @@
 /*  Dark♂ 模式适配 */
 :root.newb-night-mode {
-    /* --- Dark♂ 主题变量覆盖 --- */
-    --newb-bottom-bg: #1a232c !important;
-    --newb-editor-bg: #1a232c !important;
-    --newb-editor-hover-bg: #232e3b !important;
-    --newb-editor-focus-bg: #232e3b !important;
-    --bg1: #111820 !important;
-    --bg2: #1a232c !important;
-    --bg3: #232e3b !important;
-    --bg1_float: #1a232c !important;
-    --bg2_float: #232e3b !important;
-    --text1: #e0e5ea !important;
-    --text2: #8b96a5 !important;
-    --text3: #61666d !important;
-    --text4: #4a5463 !important;
-    --line_regular: #232e3b !important;
-    --line_light: #1a232c !important;
-    --graph_bg_regular: #1a232c !important;
-    --graph_bg_thick: #232e3b !important;
-    
-    /* --- 全局背景去色与暗化 --- */
-    &,
-    & body,
-    & #app,
-    & #all-list,
-    & .search-page-wrapper,
-    & .space-wrap,
-    & .bili-layout,
-    & body>div:has(>.bili-feed4),
-    & .history-wrap {
-        background-color: #111820 !important;
-    }
-    
-    &,
-    & body,
-    & #app,
-    & .bili-dyn-home--member {
-        background-image: none !important;
-    }
-    
-    & ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.15);
-    }
-    
-    & ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.25);
-    }
-    
-    /* --- 顶栏 --- */
-    #biliMainHeader .bili-header__bar,
-    body:has(.search-layout, .search-page-wrapper) .bili-header__bar,
-    body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar,
-    .bili-feed4>.bili-header.large-header>.bili-header__bar.slide-down {
-        background-color: #111820 !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
-        border-bottom: 1px solid #1a232c !important;
-    }
-    
-    #biliMainHeader .bili-header__channel,
-    .bili-feed4>.bili-header.large-header>.bili-header__channel>.right-channel-container>.channel-items__left>* {
-        background-color: #1a232c !important;
-        color: #e0e5ea !important;
-    }
-    
-    /* --- 页脚 --- */
-    .bili-footer,
-    .international-footer,
-    .bili-main-footer {
-        background-color: #111820 !important;
-        border-top: 1px solid #1a232c !important;
-    }
-    
-    .bili-footer *,
-    .international-footer *,
-    .bili-main-footer * {
-        color: #61666d !important;
-    }
-    
-    .bili-footer a:hover,
-    .international-footer a:hover,
-    .bili-main-footer a:hover {
-        color: #00aeec !important;
-    }
-    
-    /* --- 视频卡片 --- */
-    .bili-video-card.is-rcmd>.bili-video-card__wrap,
-    .video-list-item,
-    .search-all-list .bili-video-card__wrap,
-    .search-page-video-card {
-        background-color: #1a232c !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .bili-video-card.is-rcmd>.bili-video-card__wrap:hover,
-    .video-list-item:hover,
-    .search-all-list .bili-video-card__wrap:hover,
-    .search-page-video-card:hover {
-        background-color: #232e3b !important;
-    }
-    
-    .bili-video-card.is-rcmd>.bili-video-card__wrap:hover {
-        background-color: #232e3b !important;
-    }
-    
-    .bili-video-card__info--right>.bili-video-card__info--tit,
-    .bili-video-card__info--tit,
-    .video-list-item .title {
-        color: #e0e5ea !important;
-        transition: color 0.2s;
-    }
-    
-    .bili-video-card__info--bottom,
-    .bili-video-card__info--bottom *,
-    .bili-video-card__info--author,
-    .bili-video-card__info--date,
-    .video-list-item .up-name {
-        color: #8b96a5 !important;
-        fill: #8b96a5 !important;
-        transition: color 0.2s;
-    }
-    
-    .bili-video-card__info--tit:hover,
-    .video-list-item .title:hover,
-    .bili-video-card__info--author:hover,
-    .bili-video-card__info--bottom a:hover,
-    .bili-video-card__info--bottom a:hover *,
-    .video-list-item .up-name:hover {
-        color: #00aeec !important;
-        fill: #00aeec !important;
-    }
-    
-    /* --- 弹幕与评论区 --- */
-    #danmukuBox,
-    #commentapp,
-    .bili-comments-bottom-fixed-wrapper>div {
-        background-color: #111820 !important;
-        border-color: #1a232c !important;
-    }
-    
-    #danmukuBox>.high-level-fake-danmuku,
-    #danmukuBox>div>div {
-        background-color: #1a232c !important;
-    }
-    
-    #danmukuBox>div>div>div>.bpx-player-auxiliary>div>div>div>.bui-collapse-body>div>.bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status>.bpx-player-dm-btn-footer>div {
-        background-color: #232e3b !important;
-        color: #e0e5ea !important;
-    }
-    
-    #danmukuBox>div>div>div>.bpx-player-auxiliary>div>div>div>.bui-collapse-body>div>.bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status>.bpx-player-dm-btn-footer {
-        background-color: #111820 !important;
-    }
-    
-    .right-side-bar .up-info-container .up-name:hover,
-    .right-side-bar .up-info-container .name:hover,
-    .article-up-info .up-name:hover {
-        color: #00aeec !important;
-    }
-    
-    .article-content span:not([style*="color"]) {
-        color: #e0e5ea !important;
-    }
-    
-    .article-content blockquote {
-        background-color: #232e3b !important;
-        border-left-color: #324052 !important;
-        color: #8b96a5 !important;
-    }
-    
-    .article-content figure figcaption,
-    .right-side-bar .up-info-container .publish-text,
-    .right-side-bar .up-info-container .view-count,
-    .right-side-bar .up-info-container .article-pts {
-        color: #8b96a5 !important;
-    }
-    
-    /* --- 弹窗与浮层--- */
-    .search-header,
-    .search-layout,
-    .video-list-item,
-    .bangumi-header,
-    .bangumi-media,
-    .bili-dyn-content,
-    .bili-dyn-home--member,
-    .bili-dyn-sidebar,
-    .history-wrap,
-    .history-list,
-    .plp-l,
-    .plp-r,
-    .main-container {
-        background-color: transparent !important;
-    }
-    
-    .vui_popover_content,
-    .bili-user-profile-view,
-    .header-upload-entry,
-    .message-inner,
-    .popover-video-card,
-    .bili-message-box,
-    .bili-dialog-wrap,
-    .bui-dialog {
-        background-color: #1a232c !important;
-        border: 1px solid #232e3b !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .vui_popover_content *,
-    .bili-user-profile-view *,
-    .header-upload-entry *,
-    .message-inner *,
-    .popover-video-card * {
-        color: #e0e5ea !important;
-    }
-    
-    .vui_popover_content:hover *,
-    .bili-user-profile-view a:hover {
-        color: #00aeec !important;
-    }
-    
-    /* --- 播放页 --- */
-    #app>#mirror-vdcon,
-    #biliMainHeader>.bili-header.fixed-header>.bili-header__bar,
-    #danmukuBox>div>div>div>div>.bui-area,
-    .bpx-player-sending-area,
-    .bpx-player-sending-area .bpx-player-sending-bar,
-    #danmukuBox>div>div>div>.bpx-player-collapse>.bui-area>.bui-collapse-wrap.bui-collapse-wrap-folded {
-        background-color: #111820 !important;
-    }
-    
-    .bpx-player-video-inputbar {
-        background-color: #1a232c !important;
-    }
-    
-    .next-play>div>.card-box,
-    .rec-list>div>.card-box,
-    #mirror-vdcon>.playlist-container--right>.recommend-list-container>div>.card-box {
-        background-color: #1a232c !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .next-play>div>.card-box:hover,
-    .rec-list>div>.card-box:hover,
-    #mirror-vdcon>.playlist-container--right>.recommend-list-container>div>.card-box:hover {
-        background-color: #232e3b !important;
-    }
-    
-    .video-info-container .video-title,
-    .up-info--right .up-name,
-    .rec-list .title,
-    .next-play .title,
-    .up-detail-top a.up-name,
-    .video-desc-container,
-    .video-desc-container *,
-    .bpx-player-sending-area,
-    .space-wrap .n-text,
-    .space-wrap .title,
-    .history-wrap .title,
-    .bangumi-media .media-title {
-        color: #e0e5ea !important;
-        transition: color 0.2s;
-    }
-    
-    .up-info--right .up-description,
-    .rec-list .upname .name,
-    .next-play .upname .name,
-    .rec-list .playinfo,
-    .next-play .playinfo,
-    .history-wrap .desc,
-    .bangumi-media .media-desc {
-        color: #8b96a5 !important;
-        transition: color 0.2s;
-    }
-    
-    .up-info--right .up-name:hover,
-    .rec-list .title:hover,
-    .next-play .title:hover,
-    .up-detail-top a.up-name:hover,
-    .rec-list .upname .name:hover,
-    .next-play .upname .name:hover,
-    .bangumi-media .media-title:hover {
-        color: #00aeec !important;
-    }
-    
-    /* --- 专栏页 --- */
-    .article-container,
-    .right-side-bar,
-    .read-article-holder,
-    .article-up-info,
-    .right-side-bar .up-info-container,
-    .article-action {
-        background-color: #1a232c !important;
-        border-color: #232e3b !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .article-container .title-container .title,
-    .read-article-holder .title,
-    .right-side-bar .up-info-container .up-name,
-    .right-side-bar .up-info-container .name,
-    .article-up-info .up-name,
-    .article-content,
-    .article-content p,
-    .article-content h1,
-    .article-content h2,
-    .article-content h3,
-    .article-content h4,
-    .article-content h5,
-    .article-content h6,
-    .article-content li {
-        color: #e0e5ea !important;
-    }
+  /* --- Dark♂ 主题变量覆盖 --- */
+  --newb-bottom-bg: #1a232c !important;
+  --newb-editor-bg: #1a232c !important;
+  --newb-editor-hover-bg: #232e3b !important;
+  --newb-editor-focus-bg: #232e3b !important;
+  --bg1: #111820 !important;
+  --bg2: #1a232c !important;
+  --bg3: #232e3b !important;
+  --bg1_float: #1a232c !important;
+  --bg2_float: #232e3b !important;
+  --text1: #e0e5ea !important;
+  --text2: #8b96a5 !important;
+  --text3: #61666d !important;
+  --text4: #4a5463 !important;
+  --line_regular: #232e3b !important;
+  --line_light: #1a232c !important;
+  --graph_bg_regular: #1a232c !important;
+  --graph_bg_thick: #232e3b !important;
+
+  /* --- 全局背景去色与暗化 --- */
+  &,
+  & body,
+  & #app,
+  & #all-list,
+  & .search-page-wrapper,
+  & .space-wrap,
+  & .bili-layout,
+  & body > div:has(> .bili-feed4),
+  & .history-wrap {
+    background-color: #111820 !important;
+  }
+
+  &,
+  & body,
+  & #app,
+  & .bili-dyn-home--member {
+    background-image: none !important;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  & ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* --- 顶栏 --- */
+  #biliMainHeader .bili-header__bar,
+  body:has(.search-layout, .search-page-wrapper) .bili-header__bar,
+  body:has(.search-layout, .search-page-wrapper) .bili-header-m__bar,
+  .bili-feed4 > .bili-header.large-header > .bili-header__bar.slide-down {
+    background-color: #111820 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 1px solid #1a232c !important;
+  }
+
+  #biliMainHeader .bili-header__channel,
+  .bili-feed4
+    > .bili-header.large-header
+    > .bili-header__channel
+    > .right-channel-container
+    > .channel-items__left
+    > * {
+    background-color: #1a232c !important;
+    color: #e0e5ea !important;
+  }
+
+  /* --- 页脚 --- */
+  .bili-footer,
+  .international-footer,
+  .bili-main-footer {
+    background-color: #111820 !important;
+    border-top: 1px solid #1a232c !important;
+  }
+
+  .bili-footer *,
+  .international-footer *,
+  .bili-main-footer * {
+    color: #61666d !important;
+  }
+
+  .bili-footer a:hover,
+  .international-footer a:hover,
+  .bili-main-footer a:hover {
+    color: #00aeec !important;
+  }
+
+  /* --- 视频卡片 --- */
+  .bili-video-card.is-rcmd > .bili-video-card__wrap,
+  .video-list-item,
+  .search-all-list .bili-video-card__wrap,
+  .search-page-video-card {
+    background-color: #1a232c !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .bili-video-card.is-rcmd > .bili-video-card__wrap:hover,
+  .video-list-item:hover,
+  .search-all-list .bili-video-card__wrap:hover,
+  .search-page-video-card:hover {
+    background-color: #232e3b !important;
+  }
+
+  .bili-video-card.is-rcmd > .bili-video-card__wrap:hover {
+    background-color: #232e3b !important;
+  }
+
+  .bili-video-card__info--right > .bili-video-card__info--tit,
+  .bili-video-card__info--tit,
+  .video-list-item .title {
+    color: #e0e5ea !important;
+    transition: color 0.2s;
+  }
+
+  .bili-video-card__info--bottom,
+  .bili-video-card__info--bottom *,
+  .bili-video-card__info--author,
+  .bili-video-card__info--date,
+  .video-list-item .up-name {
+    color: #8b96a5 !important;
+    fill: #8b96a5 !important;
+    transition: color 0.2s;
+  }
+
+  .bili-video-card__info--tit:hover,
+  .video-list-item .title:hover,
+  .bili-video-card__info--author:hover,
+  .bili-video-card__info--bottom a:hover,
+  .bili-video-card__info--bottom a:hover *,
+  .video-list-item .up-name:hover {
+    color: #00aeec !important;
+    fill: #00aeec !important;
+  }
+
+  /* --- 弹幕与评论区 --- */
+  #danmukuBox,
+  #commentapp,
+  .bili-comments-bottom-fixed-wrapper > div {
+    background-color: #111820 !important;
+    border-color: #1a232c !important;
+  }
+
+  #danmukuBox > .high-level-fake-danmuku,
+  #danmukuBox > div > div {
+    background-color: #1a232c !important;
+  }
+
+  #danmukuBox
+    > div
+    > div
+    > div
+    > .bpx-player-auxiliary
+    > div
+    > div
+    > div
+    > .bui-collapse-body
+    > div
+    > .bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status
+    > .bpx-player-dm-btn-footer
+    > div {
+    background-color: #232e3b !important;
+    color: #e0e5ea !important;
+  }
+
+  #danmukuBox
+    > div
+    > div
+    > div
+    > .bpx-player-auxiliary
+    > div
+    > div
+    > div
+    > .bui-collapse-body
+    > div
+    > .bpx-player-filter-wrap.bpx-player-dm.bpx-player-hide-status
+    > .bpx-player-dm-btn-footer {
+    background-color: #111820 !important;
+  }
+
+  .right-side-bar .up-info-container .up-name:hover,
+  .right-side-bar .up-info-container .name:hover,
+  .article-up-info .up-name:hover {
+    color: #00aeec !important;
+  }
+
+  .article-content span:not([style*="color"]) {
+    color: #e0e5ea !important;
+  }
+
+  .article-content blockquote {
+    background-color: #232e3b !important;
+    border-left-color: #324052 !important;
+    color: #8b96a5 !important;
+  }
+
+  .article-content figure figcaption,
+  .right-side-bar .up-info-container .publish-text,
+  .right-side-bar .up-info-container .view-count,
+  .right-side-bar .up-info-container .article-pts {
+    color: #8b96a5 !important;
+  }
+
+  /* --- 弹窗与浮层--- */
+  .search-header,
+  .search-layout,
+  .video-list-item,
+  .bangumi-header,
+  .bangumi-media,
+  .bili-dyn-content,
+  .bili-dyn-home--member,
+  .bili-dyn-sidebar,
+  .history-wrap,
+  .history-list,
+  .plp-l,
+  .plp-r,
+  .main-container {
+    background-color: transparent !important;
+  }
+
+  .vui_popover_content,
+  .bili-user-profile-view,
+  .header-upload-entry,
+  .message-inner,
+  .popover-video-card,
+  .bili-message-box,
+  .bili-dialog-wrap,
+  .bui-dialog {
+    background-color: #1a232c !important;
+    border: 1px solid #232e3b !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .vui_popover_content *,
+  .bili-user-profile-view *,
+  .header-upload-entry *,
+  .message-inner *,
+  .popover-video-card * {
+    color: #e0e5ea !important;
+  }
+
+  .vui_popover_content:hover *,
+  .bili-user-profile-view a:hover {
+    color: #00aeec !important;
+  }
+
+  /* --- 播放页 --- */
+  #app > #mirror-vdcon,
+  #biliMainHeader > .bili-header.fixed-header > .bili-header__bar,
+  #danmukuBox > div > div > div > div > .bui-area,
+  .bpx-player-sending-area,
+  .bpx-player-sending-area .bpx-player-sending-bar,
+  #danmukuBox
+    > div
+    > div
+    > div
+    > .bpx-player-collapse
+    > .bui-area
+    > .bui-collapse-wrap.bui-collapse-wrap-folded {
+    background-color: #111820 !important;
+  }
+
+  .bpx-player-video-inputbar {
+    background-color: #1a232c !important;
+  }
+
+  .next-play > div > .card-box,
+  .rec-list > div > .card-box,
+  #mirror-vdcon
+    > .playlist-container--right
+    > .recommend-list-container
+    > div
+    > .card-box {
+    background-color: #1a232c !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .next-play > div > .card-box:hover,
+  .rec-list > div > .card-box:hover,
+  #mirror-vdcon
+    > .playlist-container--right
+    > .recommend-list-container
+    > div
+    > .card-box:hover {
+    background-color: #232e3b !important;
+  }
+
+  .video-info-container .video-title,
+  .up-info--right .up-name,
+  .rec-list .title,
+  .next-play .title,
+  .up-detail-top a.up-name,
+  .video-desc-container,
+  .video-desc-container *,
+  .bpx-player-sending-area,
+  .space-wrap .n-text,
+  .space-wrap .title,
+  .history-wrap .title,
+  .bangumi-media .media-title {
+    color: #e0e5ea !important;
+    transition: color 0.2s;
+  }
+
+  .up-info--right .up-description,
+  .rec-list .upname .name,
+  .next-play .upname .name,
+  .rec-list .playinfo,
+  .next-play .playinfo,
+  .history-wrap .desc,
+  .bangumi-media .media-desc {
+    color: #8b96a5 !important;
+    transition: color 0.2s;
+  }
+
+  .up-info--right .up-name:hover,
+  .rec-list .title:hover,
+  .next-play .title:hover,
+  .up-detail-top a.up-name:hover,
+  .rec-list .upname .name:hover,
+  .next-play .upname .name:hover,
+  .bangumi-media .media-title:hover {
+    color: #00aeec !important;
+  }
+
+  /* --- 专栏页 --- */
+  .article-container,
+  .right-side-bar,
+  .read-article-holder,
+  .article-up-info,
+  .right-side-bar .up-info-container,
+  .article-action {
+    background-color: #1a232c !important;
+    border-color: #232e3b !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .article-container .title-container .title,
+  .read-article-holder .title,
+  .right-side-bar .up-info-container .up-name,
+  .right-side-bar .up-info-container .name,
+  .article-up-info .up-name,
+  .article-content,
+  .article-content p,
+  .article-content h1,
+  .article-content h2,
+  .article-content h3,
+  .article-content h4,
+  .article-content h5,
+  .article-content h6,
+  .article-content li {
+    color: #e0e5ea !important;
+  }
 }

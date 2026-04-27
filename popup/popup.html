@@ -1,256 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>newB - B站体验优化引擎</title>
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <div class="app-container">
-    
-    <!-- 侧边栏导航 -->
-    <nav class="sidebar">
-      <header class="logo">newB</header>
-      
-      <!-- 全局总开关 -->
-      <div style="padding: 10px 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 12px; font-weight: bold; color: var(--text-main);">总开关</span>
-        <label class="switch" style="transform: scale(0.8); transform-origin: right center;" title="一键开启/关闭所有优化功能">
-          <input type="checkbox" id="master-switch">
-          <span class="slider"></span>
-        </label>
-      </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>newB - B站体验优化引擎</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- 侧边栏导航 -->
+      <nav class="sidebar">
+        <header class="logo">newB</header>
 
-      <!-- 导航菜单 -->
-      <ul class="nav-links">
-        <li class="active" data-target="tab-filter">🚫 视频过滤</li>
-        <li data-target="tab-tools">🛠️ 其他功能</li>
-        <li data-target="tab-sync">☁️ 云端同步</li>
-      </ul>
-    </nav>
-
-    <!-- 主内容区 -->
-    <main class="content">
-      
-      <!-- --- 1. 视频过滤面板 (Filter Settings) --- -->
-      <section id="tab-filter" class="tab-pane active">
-        <div class="settings-area">
-          
-          <!-- 基础净化与时长过滤 -->
-          <div class="form-group inline-group">
-            <label for="cleanup-enabled">净化页面 (去广告/直播/推广)</label>
-            <label class="switch">
-              <input type="checkbox" id="cleanup-enabled">
-              <span class="slider"></span>
-            </label>
-          </div>
-          <div class="form-group inline-group">
-            <label for="min-duration">最短时长 (分钟, 0不限制)</label>
-            <input type="number" id="min-duration" min="0" step="0.5" style="width: 60px; text-align: center;">
-          </div>
-
-          <!-- 关键词过滤组 (支持正则与通配符) -->
-          <div class="form-group">
-            <label for="title-input">标题屏蔽</label>
-            <div class="input-row">
-              <input type="text" id="title-input" placeholder="输入视频标题关键词">
-              <button id="title-add" class="btn-add">添加</button>
-            </div>
-            <div id="title-tags" class="tag-container"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="up-input">UP主屏蔽</label>
-            <div class="input-row">
-              <input type="text" id="up-input" placeholder="输入UP主昵称关键词">
-              <button id="up-add" class="btn-add">添加</button>
-            </div>
-            <div id="up-tags" class="tag-container"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="section-input">分区屏蔽</label>
-            <div class="input-row">
-              <input type="text" id="section-input" placeholder="输入分区名">
-              <button id="section-add" class="btn-add">添加</button>
-            </div>
-            <div id="section-tags" class="tag-container"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="tag-input">标签屏蔽</label>
-            <div class="input-row">
-              <input type="text" id="tag-input" placeholder="输入视频标签关键词">
-              <button id="tag-add" class="btn-add">添加</button>
-            </div>
-            <div id="tag-tags" class="tag-container"></div>
-          </div>
-        </div>
-
-        <!-- 拦截日志展示区 -->
-        <div class="logs-area">
-          <header class="log-header">
-            <span>📋 拦截日志 (最近100条)</span>
-            <button id="clear-logs" class="btn-clear" title="清空所有本地拦截记录">清空</button>
-          </header>
-          <div id="log-list" class="log-list"></div>
-        </div>
-      </section>
-
-      <!-- --- 2. 其他功能面板 --- -->
-      <section id="tab-tools" class="tab-pane">
-        
-        <!-- 模块 1: 界面与主题 -->
-        <div class="section-title">🎨 界面与主题</div>
-        
-        <div class="form-group">
-          <div class="inline-group">
-            <label for="ui-night-mode-select"> Dark♂ 模式</label>
-            <select id="ui-night-mode-select" class="newb-select">
-              <option value="off">关闭</option>
-              <option value="on">始终开启</option>
-              <option value="system">跟随系统</option>
-              <option value="custom">自定义时段</option>
-            </select>
-          </div>
-          <div class="input-row" id="night-time-range"
-            style="justify-content: flex-end; align-items: center; gap: 5px; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
-            <span style="font-size: 11px; color: var(--text-sub);">生效时段：</span>
-            <input type="time" id="ui-night-start" style="width: 80px; font-size: 11px; text-align: center;">
-            <span style="color: var(--text-sub);">至</span>
-            <input type="time" id="ui-night-end" style="width: 80px; font-size: 11px; text-align: center;">
-          </div>
-        </div>
-
-        <div class="form-group inline-group">
-          <label for="ui-layout-opt">优化页面布局 (网格重构/去冗余)</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-layout-opt">
+        <!-- 全局总开关 -->
+        <div
+          style="
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span
+            style="font-size: 12px; font-weight: bold; color: var(--text-main)"
+            >总开关</span
+          >
+          <label
+            class="switch"
+            style="transform: scale(0.8); transform-origin: right center"
+            title="一键开启/关闭所有优化功能"
+          >
+            <input type="checkbox" id="master-switch" />
             <span class="slider"></span>
           </label>
         </div>
-        
-        <div class="section-title">🫥 模块隐藏</div>
-        
-        <div class="form-group inline-group">
-          <label for="ui-hide-recommend">隐藏右侧推荐的相关视频</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-hide-recommend">
-            <span class="slider"></span>
-          </label>
-        </div>
-        
-        <div class="form-group inline-group">
-          <label for="ui-hide-home-feed">隐藏首页推荐视频</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-hide-home-feed">
-            <span class="slider"></span>
-          </label>
-        </div>
-        
-        <div class="form-group inline-group">
-          <label for="ui-hide-hot-search">隐藏热搜排行榜</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-hide-hot-search">
-            <span class="slider"></span>
-          </label>
-        </div>
-        
-        <!-- 模块 3: 悬浮预览 -->
-        <div class="section-title">🖱️ 悬浮预览</div>
-        
-        <div class="form-group">
-          <div class="inline-group">
-            <label for="ui-video-info-hover">视频信息悬浮窗 (鼠标悬停预览)</label>
-            <label class="switch">
-              <input type="checkbox" id="ui-video-info-hover">
-              <span class="slider"></span>
-            </label>
+
+        <!-- 导航菜单 -->
+        <ul class="nav-links">
+          <li class="active" data-target="tab-filter">🚫 视频过滤</li>
+          <li data-target="tab-tools">🛠️ 其他功能</li>
+          <li data-target="tab-sync">☁️ 云端同步</li>
+        </ul>
+      </nav>
+
+      <!-- 主内容区 -->
+      <main class="content">
+        <!-- --- 1. 视频过滤面板 (Filter Settings) --- -->
+        <section id="tab-filter" class="tab-pane active">
+          <div class="settings-area">
+            <!-- 基础净化与时长过滤 -->
+            <div class="form-group inline-group">
+              <label for="cleanup-enabled">净化页面 (去广告/直播/推广)</label>
+              <label class="switch">
+                <input type="checkbox" id="cleanup-enabled" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="form-group inline-group">
+              <label for="min-duration">最短时长 (分钟, 0不限制)</label>
+              <input
+                type="number"
+                id="min-duration"
+                min="0"
+                step="0.5"
+                style="width: 60px; text-align: center"
+              />
+            </div>
+
+            <!-- 关键词过滤组 (支持正则与通配符) -->
+            <div class="form-group">
+              <label for="title-input">标题屏蔽</label>
+              <div class="input-row">
+                <input
+                  type="text"
+                  id="title-input"
+                  placeholder="输入视频标题关键词"
+                />
+                <button id="title-add" class="btn-add">添加</button>
+              </div>
+              <div id="title-tags" class="tag-container"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="up-input">UP主屏蔽</label>
+              <div class="input-row">
+                <input
+                  type="text"
+                  id="up-input"
+                  placeholder="输入UP主昵称关键词"
+                />
+                <button id="up-add" class="btn-add">添加</button>
+              </div>
+              <div id="up-tags" class="tag-container"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="section-input">分区屏蔽</label>
+              <div class="input-row">
+                <input
+                  type="text"
+                  id="section-input"
+                  placeholder="输入分区名"
+                />
+                <button id="section-add" class="btn-add">添加</button>
+              </div>
+              <div id="section-tags" class="tag-container"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="tag-input">标签屏蔽</label>
+              <div class="input-row">
+                <input
+                  type="text"
+                  id="tag-input"
+                  placeholder="输入视频标签关键词"
+                />
+                <button id="tag-add" class="btn-add">添加</button>
+              </div>
+              <div id="tag-tags" class="tag-container"></div>
+            </div>
           </div>
-          
-          <!-- 视频悬浮窗子设置面板 -->
-          <div id="video-hover-sub-panel" class="sub-panel">
+
+          <!-- 拦截日志展示区 -->
+          <div class="logs-area">
+            <header class="log-header">
+              <span>📋 拦截日志 (最近100条)</span>
+              <button
+                id="clear-logs"
+                class="btn-clear"
+                title="清空所有本地拦截记录"
+              >
+                清空
+              </button>
+            </header>
+            <div id="log-list" class="log-list"></div>
+          </div>
+        </section>
+
+        <!-- --- 2. 其他功能面板 --- -->
+        <section id="tab-tools" class="tab-pane">
+          <!-- 模块 1: 界面与主题 -->
+          <div class="section-title">🎨 界面与主题</div>
+
+          <div class="form-group">
             <div class="inline-group">
-              <label for="ui-video-info-hover-ai" style="font-weight: normal; color: var(--text-sub);">显示 AI 视频总结</label>
-              <label class="switch" style="transform: scale(0.8); transform-origin: right center;">
-                <input type="checkbox" id="ui-video-info-hover-ai">
+              <label for="ui-night-mode-select"> Dark♂ 模式</label>
+              <select id="ui-night-mode-select" class="newb-select">
+                <option value="off">关闭</option>
+                <option value="on">始终开启</option>
+                <option value="system">跟随系统</option>
+                <option value="custom">自定义时段</option>
+              </select>
+            </div>
+            <div
+              class="input-row"
+              id="night-time-range"
+              style="
+                justify-content: flex-end;
+                align-items: center;
+                gap: 5px;
+                overflow: hidden;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+              "
+            >
+              <span style="font-size: 11px; color: var(--text-sub)"
+                >生效时段：</span
+              >
+              <input
+                type="time"
+                id="ui-night-start"
+                style="width: 80px; font-size: 11px; text-align: center"
+              />
+              <span style="color: var(--text-sub)">至</span>
+              <input
+                type="time"
+                id="ui-night-end"
+                style="width: 80px; font-size: 11px; text-align: center"
+              />
+            </div>
+          </div>
+
+          <div class="form-group inline-group">
+            <label for="ui-layout-opt">优化页面布局 (网格重构/去冗余)</label>
+            <label class="switch">
+              <input type="checkbox" id="ui-layout-opt" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="section-title">🫥 模块隐藏</div>
+
+          <div class="form-group inline-group">
+            <label for="ui-hide-recommend">隐藏右侧推荐的相关视频</label>
+            <label class="switch">
+              <input type="checkbox" id="ui-hide-recommend" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-group inline-group">
+            <label for="ui-hide-home-feed">隐藏首页推荐视频</label>
+            <label class="switch">
+              <input type="checkbox" id="ui-hide-home-feed" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-group inline-group">
+            <label for="ui-hide-hot-search">隐藏热搜排行榜</label>
+            <label class="switch">
+              <input type="checkbox" id="ui-hide-hot-search" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- 模块 3: 悬浮预览 -->
+          <div class="section-title">🖱️ 悬浮预览</div>
+
+          <div class="form-group">
+            <div class="inline-group">
+              <label for="ui-video-info-hover"
+                >视频信息悬浮窗 (鼠标悬停预览)</label
+              >
+              <label class="switch">
+                <input type="checkbox" id="ui-video-info-hover" />
                 <span class="slider"></span>
               </label>
             </div>
-            <div class="inline-group" style="margin-top: 5px;">
-              <label for="ui-video-info-hover-reply" style="font-weight: normal; color: var(--text-sub);">显示热门评论</label>
-              <label class="switch" style="transform: scale(0.8); transform-origin: right center;">
-                <input type="checkbox" id="ui-video-info-hover-reply">
-                <span class="slider"></span>
-              </label>
+
+            <!-- 视频悬浮窗子设置面板 -->
+            <div id="video-hover-sub-panel" class="sub-panel">
+              <div class="inline-group">
+                <label
+                  for="ui-video-info-hover-ai"
+                  style="font-weight: normal; color: var(--text-sub)"
+                  >显示 AI 视频总结</label
+                >
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="ui-video-info-hover-ai" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="inline-group" style="margin-top: 5px">
+                <label
+                  for="ui-video-info-hover-reply"
+                  style="font-weight: normal; color: var(--text-sub)"
+                  >显示热门评论</label
+                >
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="ui-video-info-hover-reply" />
+                  <span class="slider"></span>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-          
-        <div class="form-group inline-group">
-          <label for="ui-user-info-hover">UP主信息悬浮窗 (鼠标悬停预览)</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-user-info-hover">
-            <span class="slider"></span>
-          </label>
-        </div>
-        
-        <div class="form-group inline-group">
-          <label for="ui-video-info-delay">悬浮窗全局触发延迟 (毫秒)</label>
-          <input type="number" id="ui-video-info-delay" min="100" step="100"
-            style="width: 70px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; text-align: center;">
-        </div>
 
-        <!-- 模块 3: 核心增强 -->
-        <div class="section-title">⚙️ 核心增强</div>
-
-        <div class="form-group inline-group">
-          <label for="ui-show-ip">显示评论 IP 属地</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-show-ip">
-            <span class="slider"></span>
-          </label>
-        </div>
-
-        <div class="form-group inline-group">
-          <label for="ui-show-cover-viewer" style="color: var(--bili-pink);" title="高频请求可能触发 B站 API 频率限制">显示视频封面观看人数 (易触发风控)</label>
-          <label class="switch">
-            <input type="checkbox" id="ui-show-cover-viewer">
-            <span class="slider"></span>
-          </label>
-        </div>
-      </section>
-
-      <!-- --- 3. 云端同步面板 --- -->
-      <section id="tab-sync" class="tab-pane">
-        
-        <!-- 浏览器账号云同步 -->
-        <article class="sync-card">
-          <h3>☁️ 云端同步</h3>
-          <div class="sync-actions">
-            <button id="btn-upload" class="btn-primary">备份当前配置到云端 ↑</button>
-            <button id="btn-download" class="btn-secondary">从云端恢复配置 ↓</button>
+          <div class="form-group inline-group">
+            <label for="ui-user-info-hover"
+              >UP主信息悬浮窗 (鼠标悬停预览)</label
+            >
+            <label class="switch">
+              <input type="checkbox" id="ui-user-info-hover" />
+              <span class="slider"></span>
+            </label>
           </div>
-          <div id="sync-status" class="status-msg"></div>
-        </article>
-        
-        <!-- 本地文件导入导出 -->
-        <article class="sync-card" style="margin-top: 15px;">
-          <h3>📥 本地文件备份</h3>
-          <div class="sync-actions">
-            <button id="btn-export" class="btn-secondary">导出 JSON 配置文件</button>
-            <button id="btn-import-trigger" class="btn-secondary">导入 JSON 配置文件</button>
-            <input type="file" id="file-import" style="display:none" accept=".json">
-          </div>
-        </article>
-      </section>
 
-    </main>
-  </div>
-  
-  <!-- 核心逻辑脚本注入 -->
-  <script src="../common/config-manager.js"></script>
-  <script src="popup.js"></script>
-</body>
+          <div class="form-group inline-group">
+            <label for="ui-video-info-delay">悬浮窗全局触发延迟 (毫秒)</label>
+            <input
+              type="number"
+              id="ui-video-info-delay"
+              min="100"
+              step="100"
+              style="
+                width: 70px;
+                padding: 4px 8px;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                text-align: center;
+              "
+            />
+          </div>
+
+          <!-- 模块 3: 核心增强 -->
+          <div class="section-title">⚙️ 核心增强</div>
+
+          <div class="form-group inline-group">
+            <label for="ui-show-ip">显示评论 IP 属地</label>
+            <label class="switch">
+              <input type="checkbox" id="ui-show-ip" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-group inline-group">
+            <label
+              for="ui-show-cover-viewer"
+              style="color: var(--bili-pink)"
+              title="高频请求可能触发 B站 API 频率限制"
+              >显示视频封面观看人数 (易触发风控)</label
+            >
+            <label class="switch">
+              <input type="checkbox" id="ui-show-cover-viewer" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </section>
+
+        <!-- --- 3. 云端同步面板 --- -->
+        <section id="tab-sync" class="tab-pane">
+          <!-- 浏览器账号云同步 -->
+          <article class="sync-card">
+            <h3>☁️ 云端同步</h3>
+            <div class="sync-actions">
+              <button id="btn-upload" class="btn-primary">
+                备份当前配置到云端 ↑
+              </button>
+              <button id="btn-download" class="btn-secondary">
+                从云端恢复配置 ↓
+              </button>
+            </div>
+            <div id="sync-status" class="status-msg"></div>
+          </article>
+
+          <!-- 本地文件导入导出 -->
+          <article class="sync-card" style="margin-top: 15px">
+            <h3>📥 本地文件备份</h3>
+            <div class="sync-actions">
+              <button id="btn-export" class="btn-secondary">
+                导出 JSON 配置文件
+              </button>
+              <button id="btn-import-trigger" class="btn-secondary">
+                导入 JSON 配置文件
+              </button>
+              <input
+                type="file"
+                id="file-import"
+                style="display: none"
+                accept=".json"
+              />
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <!-- 核心逻辑脚本注入 -->
+    <script src="../common/config-manager.js"></script>
+    <script src="popup.js"></script>
+  </body>
 </html>

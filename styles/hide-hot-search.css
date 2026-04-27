@@ -1,19 +1,20 @@
 /* 顶栏搜索框优化 */
 :root.newb-hide-hot-search {
+  /* 移除搜索面板中的热搜模块 */
+  .search-panel .trending {
+    display: none !important;
+  }
 
-    /* 移除搜索面板中的热搜模块 */
-    .search-panel .trending {
-        display: none !important;
+  /* 搜索框聚焦且无历史/建议记录时：修复圆角并隐藏空面板底栏 */
+  .center-search__bar.is-focus:not(
+      :has(.search-panel .history, .search-panel .suggestions)
+    ) {
+    #nav-searchform.is-focus {
+      border-radius: 8px !important;
     }
 
-    /* 搜索框聚焦且无历史/建议记录时：修复圆角并隐藏空面板底栏 */
-    .center-search__bar.is-focus:not(:has(.search-panel .history, .search-panel .suggestions)) {
-        #nav-searchform.is-focus {
-            border-radius: 8px !important;
-        }
-
-        .search-panel {
-            display: none !important;
-        }
+    .search-panel {
+      display: none !important;
     }
+  }
 }

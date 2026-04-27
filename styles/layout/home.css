@@ -1,227 +1,232 @@
 :root.newb-optimized-layout {
+  /* 隐藏冗余模块 */
+  .palette-button-outer.palette-feed4,
+  & body > .desktop-download-tip,
+  div.bili-feed4 > div.header-channel > div.header-channel-fixed,
+  & body > div.adcard,
+  .bili-feed4 .container > .recommended-swipe,
+  .is-version8 > .recommended-swipe,
+  .bili-feed4 > .header-channel,
+  .is-version8 > .bili-live-card,
+  .bili-feed4 .container > .bili-live-card,
+  .is-version8 > .floor-single-card,
+  .bili-feed4 .container > .floor-single-card {
+    display: none !important;
+  }
 
-    /* 隐藏冗余模块 */
-    .palette-button-outer.palette-feed4,
-    & body>.desktop-download-tip,
-    div.bili-feed4>div.header-channel>div.header-channel-fixed,
-    & body>div.adcard,
-    .bili-feed4 .container>.recommended-swipe,
-    .is-version8>.recommended-swipe,
-    .bili-feed4>.header-channel,
-    .is-version8>.bili-live-card,
-    .bili-feed4 .container>.bili-live-card,
-    .is-version8>.floor-single-card,
-    .bili-feed4 .container>.floor-single-card {
-        display: none !important;
+  /* 修复推荐流侧边栏与滚动按钮定位 */
+  .xs_sm.recommended-container_floor-aside {
+    position: relative !important;
+  }
+
+  .feed-roll-btn.xs_sm {
+    position: absolute !important;
+    top: 0 !important;
+    right: -45px !important;
+    transform: translateY(0) !important;
+  }
+
+  /* 优化"不感兴趣"弹窗UI */
+  & body > div.vui_popover.vui_popover-is-bottom-end > div {
+    box-shadow: none;
+    border: none;
+
+    > div.bili-video-card__info--no-interest-panel {
+      border-radius: 6px;
+      padding: 0;
+      overflow: hidden;
+      width: fit-content;
+
+      > div {
+        height: 1rem;
+        padding: 12px 10px;
+      }
     }
+  }
 
-    /* 修复推荐流侧边栏与滚动按钮定位 */
-    .xs_sm.recommended-container_floor-aside {
-        position: relative !important;
+  .bili-feed4 > main > .feed2 > div > .container {
+    > .feed-card > div > .bili-video-card__wrap > .bili-video-card__no-interest,
+    > .bili-video-card.is-rcmd
+      > .bili-video-card__wrap
+      > .bili-video-card__no-interest {
+      border-radius: 12px;
     }
+  }
 
-    .feed-roll-btn.xs_sm {
-        position: absolute !important;
-        top: 0 !important;
-        right: -45px !important;
-        transform: translateY(0) !important;
+  /* 响应式网格布局重构 */
+  .is-version8 > *,
+  .bili-feed4 .container > * {
+    margin: 0 !important;
+  }
+
+  .is-version8,
+  .bili-feed4 .container {
+    row-gap: 1.3rem !important;
+    column-gap: 1.5rem !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+
+    > .feed-card:nth-of-type(n + 9) {
+      display: block !important;
     }
+  }
 
-    /* 优化"不感兴趣"弹窗UI */
-    & body>div.vui_popover.vui_popover-is-bottom-end>div {
-        box-shadow: none;
-        border: none;
-
-        >div.bili-video-card__info--no-interest-panel {
-            border-radius: 6px;
-            padding: 0;
-            overflow: hidden;
-            width: fit-content;
-
-            >div {
-                height: 1rem;
-                padding: 12px 10px;
-            }
-        }
-    }
-
-    .bili-feed4>main>.feed2>div>.container {
-
-        >.feed-card>div>.bili-video-card__wrap>.bili-video-card__no-interest,
-        >.bili-video-card.is-rcmd>.bili-video-card__wrap>.bili-video-card__no-interest {
-            border-radius: 12px;
-        }
-    }
-
-    /* 响应式网格布局重构 */
-    .is-version8>*,
-    .bili-feed4 .container>* {
-        margin: 0 !important;
-    }
-
+  @media (min-width: 1140px) and (max-width: 1400px) {
     .is-version8,
     .bili-feed4 .container {
-        row-gap: 1.3rem !important;
-        column-gap: 1.5rem !important;
-        grid-template-columns: repeat(3, 1fr) !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      column-gap: 1.4rem !important;
+    }
+  }
 
-        >.feed-card:nth-of-type(n + 9) {
-            display: block !important;
-        }
+  @media (min-width: 1400px) {
+    .is-version8,
+    .bili-feed4 .container {
+      grid-template-columns: repeat(5, 1fr) !important;
+      column-gap: 1.3rem !important;
+    }
+  }
+
+  /* 视频卡片悬浮与交互优化 */
+  .bili-video-card.is-rcmd > .bili-video-card__wrap {
+    background-color: #f0f7fc !important;
+    box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1) !important;
+    border-radius: 13px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bili-video-card.is-rcmd > .bili-video-card__wrap:hover {
+    box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25) !important;
+    background-color: #e8f4fd !important;
+    transform: translateY(-2px);
+  }
+
+  .bili-video-card__wrap > a {
+    border-radius: 13px !important;
+    overflow: hidden !important;
+    transform: scale(0.99);
+    transform-origin: center;
+    transition: all 0.4s ease !important;
+  }
+
+  div.bili-video-card__wrap > a:hover {
+    transform: scale(1);
+    transform-origin: center;
+  }
+
+  .v-inline-player
+    > div
+    > div
+    > div.bpx-player-primary-area
+    > div.bpx-player-video-area {
+    background-color: rgb(196 207 199 / 60%);
+  }
+
+  .bili-video-card__wrap
+    > .bili-video-card__info
+    > .bili-video-card__info--right
+    > .bili-video-card__info--bottom {
+    color: #00000063 !important;
+  }
+
+  a.channel-link {
+    place-self: center !important;
+  }
+
+  /* 屏蔽按钮悬浮动画 */
+  .bili-video-card__info--bottom {
+    > a.bili-video-card__info--owner {
+      pointer-events: auto;
+      position: relative;
     }
 
-    @media (min-width: 1140px) and (max-width: 1400px) {
+    > .blkContainer {
+      flex: 1;
+      position: relative;
+      margin-left: 4px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr auto;
 
-        .is-version8,
-        .bili-feed4 .container {
-            grid-template-columns: repeat(4, 1fr) !important;
-            column-gap: 1.4rem !important;
-        }
+      > div {
+        line-height: 0.75rem;
+        background-color: #616161;
+        color: #f1f1f1;
+        padding: 2px;
+        font-size: 0.75rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        transition: clip-path 0.3s cubic-bezier(0.03, 0.07, 0.58, 1);
+        width: fit-content;
+        cursor: pointer;
+      }
+
+      > .blockBtn1 {
+        margin-right: 0.2rem;
+      }
+
+      > .blockBtn2 {
+        justify-self: end;
+      }
     }
 
-    @media (min-width: 1400px) {
+    &:hover > .blkContainer > div {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      transition: clip-path 0.3s cubic-bezier(0.03, 0.07, 0.58, 1) 0.15s;
+    }
+  }
 
-        .is-version8,
-        .bili-feed4 .container {
-            grid-template-columns: repeat(5, 1fr) !important;
-            column-gap: 1.3rem !important;
-        }
+  /* 信息流加载动画锚点定位 */
+  .bili-feed4 > main > div.feed2 > div > div.container.is-version8 {
+    > div {
+      order: 0;
     }
 
-    /* 视频卡片悬浮与交互优化 */
-    .bili-video-card.is-rcmd>.bili-video-card__wrap {
-        background-color: #F0F7FC !important;
-        box-shadow: 0 4px 12px rgba(0, 174, 236, 0.1) !important;
-        border-radius: 13px;
-        overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    > div:nth-last-child(1 of:not([block-reason]):not(.load-more-anchor)) {
+      anchor-name: --first-loading-div;
     }
 
-    .bili-video-card.is-rcmd>.bili-video-card__wrap:hover {
-        box-shadow: 0 8px 24px rgba(0, 174, 236, 0.25) !important;
-        background-color: #E8F4FD !important;
-        transform: translateY(-2px);
+    > div.load-more-anchor {
+      z-index: -1;
+      visibility: hidden;
+      position-anchor: --first-loading-div;
+      position: absolute;
+      top: anchor(top);
+      left: anchor(left);
     }
 
-    .bili-video-card__wrap>a {
-        border-radius: 13px !important;
-        overflow: hidden !important;
-        transform: scale(0.99);
-        transform-origin: center;
-        transition: all 0.4s ease !important;
+    > div:has(> .loading_animation) {
+      anchor-name: --first-loading-div;
+
+      & ~ div:has(> .loading_animation) {
+        anchor-name: none;
+      }
     }
 
-    div.bili-video-card__wrap>a:hover {
-        transform: scale(1);
-        transform-origin: center;
+    > div[block-reason] {
+      order: 1;
+      display: none !important;
     }
+  }
 
-    .v-inline-player>div>div>div.bpx-player-primary-area>div.bpx-player-video-area {
-        background-color: rgb(196 207 199 / 60%);
+  .bili-video-card__wrap > .bili-video-card__info {
+    margin-top: 0 !important;
+
+    > .bili-video-card__info--right {
+      padding: 8px 4px;
+
+      > .bili-video-card__info--no-interest {
+        height: fit-content;
+        position-anchor: --video-tit;
+        top: calc(anchor(bottom) - 19.5px);
+        right: anchor(right);
+      }
+
+      > .bili-video-card__info--tit {
+        anchor-name: --video-tit;
+        padding-right: 0;
+      }
     }
-
-    .bili-video-card__wrap>.bili-video-card__info>.bili-video-card__info--right>.bili-video-card__info--bottom {
-        color: #00000063 !important;
-    }
-
-    a.channel-link {
-        place-self: center !important;
-    }
-
-    /* 屏蔽按钮悬浮动画 */
-    .bili-video-card__info--bottom {
-        >a.bili-video-card__info--owner {
-            pointer-events: auto;
-            position: relative;
-        }
-
-        >.blkContainer {
-            flex: 1;
-            position: relative;
-            margin-left: 4px;
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr auto;
-
-            >div {
-                line-height: 0.75rem;
-                background-color: #616161;
-                color: #f1f1f1;
-                padding: 2px;
-                font-size: 0.75rem;
-                border-radius: 4px;
-                white-space: nowrap;
-                clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-                transition: clip-path 0.3s cubic-bezier(0.03, 0.07, 0.58, 1);
-                width: fit-content;
-                cursor: pointer;
-            }
-
-            >.blockBtn1 {
-                margin-right: .2rem;
-            }
-
-            >.blockBtn2 {
-                justify-self: end;
-            }
-        }
-
-        &:hover>.blkContainer>div {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            transition: clip-path 0.3s cubic-bezier(0.03, 0.07, 0.58, 1) 0.15s;
-        }
-    }
-
-    /* 信息流加载动画锚点定位 */
-    .bili-feed4>main>div.feed2>div>div.container.is-version8 {
-        >div {
-            order: 0;
-        }
-
-        >div:nth-last-child(1 of:not([block-reason]):not(.load-more-anchor)) {
-            anchor-name: --first-loading-div;
-        }
-
-        >div.load-more-anchor {
-            z-index: -1;
-            visibility: hidden;
-            position-anchor: --first-loading-div;
-            position: absolute;
-            top: anchor(top);
-            left: anchor(left);
-        }
-
-        >div:has(>.loading_animation) {
-            anchor-name: --first-loading-div;
-
-            &~div:has(>.loading_animation) {
-                anchor-name: none;
-            }
-        }
-
-        >div[block-reason] {
-            order: 1;
-            display: none !important;
-        }
-    }
-
-    .bili-video-card__wrap>.bili-video-card__info {
-        margin-top: 0 !important;
-
-        >.bili-video-card__info--right {
-            padding: 8px 4px;
-
-            >.bili-video-card__info--no-interest {
-                height: fit-content;
-                position-anchor: --video-tit;
-                top: calc(anchor(bottom) - 19.5px);
-                right: anchor(right);
-            }
-
-            >.bili-video-card__info--tit {
-                anchor-name: --video-tit;
-                padding-right: 0;
-            }
-        }
-    }
+  }
 }

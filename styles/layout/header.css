@@ -1,65 +1,66 @@
 :root.newb-optimized-layout {
+  .bili-feed4,
+  .bili-feed4 > .bili-header.large-header,
+  .bili-feed4 > .bili-header.large-header > .bili-header__banner,
+  .bili-feed4 > div.bili-header.large-header > .bili-header__channel,
+  .bili-feed4 > div.bili-header.large-header > div.bili-header__bar {
+    background-color: transparent !important;
+  }
 
-    .bili-feed4,
-    .bili-feed4>.bili-header.large-header,
-    .bili-feed4>.bili-header.large-header>.bili-header__banner,
-    .bili-feed4>div.bili-header.large-header>.bili-header__channel,
-    .bili-feed4>div.bili-header.large-header>div.bili-header__bar {
-        background-color: transparent !important;
-    }
+  /* 顶栏吸顶毛玻璃效果 */
+  .bili-feed4 > .bili-header.large-header > .bili-header__bar.slide-down {
+    background-color: rgba(240, 247, 252, 0.9) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 174, 236, 0.15) !important;
+  }
 
-    /* 顶栏吸顶毛玻璃效果 */
-    .bili-feed4>.bili-header.large-header>.bili-header__bar.slide-down {
-        background-color: rgba(240, 247, 252, 0.9) !important;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 174, 236, 0.15) !important;
-    }
-
-    .bili-feed4>.bili-header.large-header>.bili-header__channel>.right-channel-container>.channel-items__left>* {
-        background-color: #F0F7FC !important;
-        box-shadow: 0 2px 8px rgba(0, 174, 236, 0.08);
-    }
+  .bili-feed4
+    > .bili-header.large-header
+    > .bili-header__channel
+    > .right-channel-container
+    > .channel-items__left
+    > * {
+    background-color: #f0f7fc !important;
+    box-shadow: 0 2px 8px rgba(0, 174, 236, 0.08);
+  }
 }
 
 /* 隐藏除“首页”外的所有左侧导航项 */
 :root.newb-layout-common {
-
-    .bili-header__bar>ul.left-entry>li:not(:first-child),
-    #biliMainHeader ul.left-entry>li:not(:first-child),
-    .bili-header ul.left-entry>li:not(:first-child) {
-        display: none !important;
-    }
+  .bili-header__bar > ul.left-entry > li:not(:first-child),
+  #biliMainHeader ul.left-entry > li:not(:first-child),
+  .bili-header ul.left-entry > li:not(:first-child) {
+    display: none !important;
+  }
 }
 
 /* 针对第一个导航项：隐藏“首页”文字，单独保留 Logo 图标 */
 :root.newb-layout-common {
-
-    .bili-header__bar>ul.left-entry>li:first-child>a span,
-    #biliMainHeader ul.left-entry>li:first-child>a span,
-    .bili-header ul.left-entry>li:first-child>a span,
-    .bili-header__bar>ul.left-entry>li:first-child>a .default-entry {
-        display: none !important;
-    }
+  .bili-header__bar > ul.left-entry > li:first-child > a span,
+  #biliMainHeader ul.left-entry > li:first-child > a span,
+  .bili-header ul.left-entry > li:first-child > a span,
+  .bili-header__bar > ul.left-entry > li:first-child > a .default-entry {
+    display: none !important;
+  }
 }
 
 /* 修复因隐藏左侧导航导致的搜索框偏移，强制居中对齐 */
 :root.newb-layout-common {
+  .bili-header__bar > ul.left-entry,
+  #biliMainHeader ul.left-entry,
+  .bili-header ul.left-entry {
+    flex: 1 !important;
+  }
 
-    .bili-header__bar>ul.left-entry,
-    #biliMainHeader ul.left-entry,
-    .bili-header ul.left-entry {
-        flex: 1 !important;
-    }
+  .bili-header__bar > ul.right-entry,
+  #biliMainHeader ul.right-entry,
+  .bili-header ul.right-entry {
+    flex: 1 !important;
+    justify-content: flex-end !important;
+  }
 
-    .bili-header__bar>ul.right-entry,
-    #biliMainHeader ul.right-entry,
-    .bili-header ul.right-entry {
-        flex: 1 !important;
-        justify-content: flex-end !important;
-    }
-
-    .center-search-container {
-        flex: 0 1 500px !important;
-        max-width: 500px !important;
-    }
+  .center-search-container {
+    flex: 0 1 500px !important;
+    max-width: 500px !important;
+  }
 }

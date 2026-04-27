@@ -1,98 +1,100 @@
 :root.newb-optimized-layout {
-    /* --- 全局主题变量注入 --- */
-    --Wh0_rgb: transparent !important;
-    --newb-bottom-bg: #F0F7FC !important;
-    --newb-editor-bg: #F0F7FC !important;
-    --newb-editor-hover-bg: #FFFFFF !important;
-    --newb-editor-focus-bg: #FFFFFF !important;
+  /* --- 全局主题变量注入 --- */
+  --Wh0_rgb: transparent !important;
+  --newb-bottom-bg: #f0f7fc !important;
+  --newb-editor-bg: #f0f7fc !important;
+  --newb-editor-hover-bg: #ffffff !important;
+  --newb-editor-focus-bg: #ffffff !important;
 
-    /* --- 基础交互与滚动条 --- */
-    & {
-        scroll-behavior: smooth;
+  /* --- 基础交互与滚动条 --- */
+  & {
+    scroll-behavior: smooth;
+  }
+
+  & ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background: rgba(148, 153, 160, 0.3);
+    border-radius: 4px;
+  }
+
+  & ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 153, 160, 0.5);
+  }
+
+  /* --- 全局背景统一化 --- */
+  &,
+  & body,
+  & #app,
+  & #all-list,
+  & .search-page-wrapper,
+  & .bili-layout,
+  & body > div:has(> .bili-feed4),
+  & .history-wrap {
+    background-color: #e4f1f9 !important;
+  }
+
+  .search-header,
+  .search-layout,
+  .video-list-item,
+  .bangumi-header,
+  .bangumi-media,
+  .bili-dyn-content,
+  .bili-dyn-home--member,
+  .bili-dyn-sidebar,
+  .history-wrap,
+  .history-list,
+  .plp-l,
+  .plp-r,
+  .main-container {
+    background-color: transparent !important;
+  }
+
+  /* --- 广告与推广位屏蔽 --- */
+  #slide_ad,
+  #right-bottom-banner,
+  #notice,
+  #activity_vote,
+  .pop-live-small-mode,
+  #bannerAd,
+  .video-card-ad-small,
+  .video-page-game-card-small {
+    display: none !important;
+  }
+
+  #mirror-vdcon > div.left-container {
+    > div.act-now,
+    > div.act-end,
+    > div[class^="activity"] {
+      display: none;
     }
+  }
 
-    & ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-        background: transparent;
+  #mirror-vdcon > div[class*="left"] {
+    > a,
+    > .ad-report,
+    > .ad-floor-exp {
+      display: none;
     }
+  }
 
-    & ::-webkit-scrollbar-track {
-        background: transparent;
-    }
+  #mirror-vdcon
+    > div[class*="right"]
+    > .right-container-inner
+    > .rcmd-tab
+    > [class^="ad"] {
+    display: none;
+  }
 
-    & ::-webkit-scrollbar-thumb {
-        background: rgba(148, 153, 160, 0.3);
-        border-radius: 4px;
-    }
-
-    & ::-webkit-scrollbar-thumb:hover {
-        background: rgba(148, 153, 160, 0.5);
-    }
-
-    /* --- 全局背景统一化 --- */
-    &,
-    & body,
-    & #app,
-    & #all-list,
-    & .search-page-wrapper,
-    & .bili-layout,
-    & body>div:has(>.bili-feed4),
-    & .history-wrap {
-        background-color: #E4F1F9 !important;
-    }
-
-    .search-header,
-    .search-layout,
-    .video-list-item,
-    .bangumi-header,
-    .bangumi-media,
-    .bili-dyn-content,
-    .bili-dyn-home--member,
-    .bili-dyn-sidebar,
-    .history-wrap,
-    .history-list,
-    .plp-l,
-    .plp-r,
-    .main-container {
-        background-color: transparent !important;
-    }
-
-    /* --- 广告与推广位屏蔽 --- */
-    #slide_ad,
-    #right-bottom-banner,
-    #notice,
-    #activity_vote,
-    .pop-live-small-mode,
-    #bannerAd,
-    .video-card-ad-small,
-    .video-page-game-card-small {
-        display: none !important;
-    }
-
-    #mirror-vdcon>div.left-container {
-
-        >div.act-now,
-        >div.act-end,
-        >div[class^="activity"] {
-            display: none;
-        }
-    }
-
-    #mirror-vdcon>div[class*="left"] {
-
-        >a,
-        >.ad-report,
-        >.ad-floor-exp {
-            display: none;
-        }
-    }
-
-    #mirror-vdcon>div[class*="right"]>.right-container-inner>.rcmd-tab>[class^="ad"] {
-        display: none;
-    }
-
-    .fixed-sidenav-storage div:not([class]) {
-        display: none !important;
-    }
+  .fixed-sidenav-storage div:not([class]) {
+    display: none !important;
+  }
 }

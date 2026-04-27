@@ -1,8 +1,7 @@
 /* 隐藏播放页右侧推荐 */
 :root.newb-hide-recommend {
-
-    /* 隐藏播放页右侧推荐、相关视频及底部推荐 */
-    .bpx-player-ending-related,
+  /* 隐藏播放页右侧推荐、相关视频及底部推荐 */
+  .bpx-player-ending-related,
     .video-page-card-small,
     .rec-footer,
     .right-container .rec-list,
@@ -13,10 +12,10 @@
     .right-container[class*="recommend"],
     .right-container [class*="related-video"],
     #bilibili-player[class*="ending-related"] {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
 }
