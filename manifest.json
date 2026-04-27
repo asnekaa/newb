@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "newB - 让你的Bilibili焕然一新",
   "short_name": "newB",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "优化Bilibili使用体验。",
   "default_locale": "zh_CN",
   "author": "ASneka",
