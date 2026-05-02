@@ -47,16 +47,16 @@
         "styles/night-mode.css"
       ],
       "js": [
-        "common/utils.js",
         "common/bili-api.js",
         "common/config-manager.js",
+        "common/utils.js",
         "content/core/ui-engine.js",
+        "content/core/main.js",
         "content/modules/cleanup-engine.js",
-        "content/modules/filter-engine.js",
-        "content/modules/video-info-hover.js",
-        "content/modules/user-info-hover.js",
         "content/modules/cover-viewer.js",
-        "content/core/main.js"
+        "content/modules/filter-engine.js",
+        "content/modules/user-info-hover.js",
+        "content/modules/video-info-hover.js"
       ],
       "run_at": "document_start"
     },
