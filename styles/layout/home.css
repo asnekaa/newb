@@ -26,24 +26,6 @@
     transform: translateY(0) !important;
   }
 
-  /* 优化"不感兴趣"弹窗UI */
-  & body > div.vui_popover.vui_popover-is-bottom-end > div {
-    box-shadow: none;
-    border: none;
-
-    > div.bili-video-card__info--no-interest-panel {
-      border-radius: 6px;
-      padding: 0;
-      overflow: hidden;
-      width: fit-content;
-
-      > div {
-        height: 1rem;
-        padding: 12px 10px;
-      }
-    }
-  }
-
   .bili-feed4 > main > .feed2 > div > .container {
     > .feed-card > div > .bili-video-card__wrap > .bili-video-card__no-interest,
     > .bili-video-card.is-rcmd
