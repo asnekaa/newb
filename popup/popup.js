@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("ui-show-ip").checked = ui.showIpLocation;
     document.getElementById("ui-show-cover-viewer").checked =
       ui.showCoverViewer ?? false;
+    document.getElementById("ui-hao-van-de").checked = ui.haoVanDe ?? false;
 
     // 3.  Dark♂ 模式渲染与自身主题切换
     const nm = ui.nightMode || {
@@ -171,49 +172,41 @@ document.addEventListener("DOMContentLoaded", async () => {
    * 保存当前表单状态至本地并刷新 UI
    */
   const saveAndRefresh = async () => {
+    // 好van的拦截器：若开启，则通过随机字典读取错位的 DOM 状态
+    const getVal = (id) => {
+      const mappedId =
+        config.ui.haoVanDe && config.ui.haoVanDeMap
+          ? config.ui.haoVanDeMap[id] || id
+          : id;
+      const el = document.getElementById(mappedId);
+      return el ? el.checked : false;
+    };
+
     config.masterSwitch = document.getElementById("master-switch").checked;
-    config.cleanup.enabled = document.getElementById("cleanup-enabled").checked;
     config.filter.minDuration =
       parseFloat(document.getElementById("min-duration").value) || 0;
-
-    // 保存过滤子项开关状态
-    config.filter.durationEnabled =
-      document.getElementById("duration-enabled").checked;
-    config.filter.titleEnabled =
-      document.getElementById("title-enabled").checked;
-    config.filter.upEnabled = document.getElementById("up-enabled").checked;
-    config.filter.sectionEnabled =
-      document.getElementById("section-enabled").checked;
-    config.filter.tagEnabled = document.getElementById("tag-enabled").checked;
-
-    config.ui.layoutOptimization =
-      document.getElementById("ui-layout-opt").checked;
-    config.ui.hideHotSearch =
-      document.getElementById("ui-hide-hot-search").checked;
-    config.ui.hideRecommend =
-      document.getElementById("ui-hide-recommend").checked;
-    config.ui.redirectHomeToSearch =
-      document.getElementById("ui-redirect-home").checked;
-    config.ui.hideHomeFeed =
-      document.getElementById("ui-hide-home-feed").checked;
-
-    config.ui.videoInfoHover = document.getElementById(
-      "ui-video-info-hover",
-    ).checked;
-    config.ui.videoInfoHoverAi = document.getElementById(
-      "ui-video-info-hover-ai",
-    ).checked;
-    config.ui.videoInfoHoverReply = document.getElementById(
-      "ui-video-info-hover-reply",
-    ).checked;
-    config.ui.userInfoHover =
-      document.getElementById("ui-user-info-hover").checked;
     config.ui.infoHoverDelay =
       parseInt(document.getElementById("ui-video-info-delay").value) || 500;
-    config.ui.showIpLocation = document.getElementById("ui-show-ip").checked;
-    config.ui.showCoverViewer = document.getElementById(
-      "ui-show-cover-viewer",
-    ).checked;
+
+    // 经过拦截器处理的开关状态
+    config.cleanup.enabled = getVal("cleanup-enabled");
+    config.filter.durationEnabled = getVal("duration-enabled");
+    config.filter.titleEnabled = getVal("title-enabled");
+    config.filter.upEnabled = getVal("up-enabled");
+    config.filter.sectionEnabled = getVal("section-enabled");
+    config.filter.tagEnabled = getVal("tag-enabled");
+
+    config.ui.layoutOptimization = getVal("ui-layout-opt");
+    config.ui.hideHotSearch = getVal("ui-hide-hot-search");
+    config.ui.hideRecommend = getVal("ui-hide-recommend");
+    config.ui.redirectHomeToSearch = getVal("ui-redirect-home");
+    config.ui.hideHomeFeed = getVal("ui-hide-home-feed");
+    config.ui.videoInfoHover = getVal("ui-video-info-hover");
+    config.ui.videoInfoHoverAi = getVal("ui-video-info-hover-ai");
+    config.ui.videoInfoHoverReply = getVal("ui-video-info-hover-reply");
+    config.ui.userInfoHover = getVal("ui-user-info-hover");
+    config.ui.showIpLocation = getVal("ui-show-ip");
+    config.ui.showCoverViewer = getVal("ui-show-cover-viewer");
 
     const nightModeSelect = document.getElementById(
       "ui-night-mode-select",
@@ -423,6 +416,89 @@ document.addEventListener("DOMContentLoaded", async () => {
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", () => {
         if (config.ui?.nightMode?.followSystem) renderAll();
+      });
+
+    // 9. 好van的逻辑 (独立于常规 inputs 监听)
+    const haoVanDeToggle = document.getElementById("ui-hao-van-de");
+    const haoVanDeModal = document.getElementById("hao-van-de-modal");
+
+    // 定义两个独立的隔离区，防止跨区错位
+    const filterSwitches = [
+      "cleanup-enabled",
+      "duration-enabled",
+      "title-enabled",
+      "up-enabled",
+      "section-enabled",
+      "tag-enabled",
+    ];
+    const uiSwitches = [
+      "ui-layout-opt",
+      "ui-hide-hot-search",
+      "ui-hide-recommend",
+      "ui-redirect-home",
+      "ui-hide-home-feed",
+      "ui-video-info-hover",
+      "ui-video-info-hover-ai",
+      "ui-video-info-hover-reply",
+      "ui-user-info-hover",
+      "ui-show-ip",
+      "ui-show-cover-viewer",
+    ];
+
+    // 洗牌算法 (Fisher-Yates)
+    const shuffleArray = (array) => {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    };
+
+    // 生成随机映射字典
+    const generateMap = () => {
+      const map = {};
+      const shuffledFilter = shuffleArray(filterSwitches);
+      const shuffledUI = shuffleArray(uiSwitches);
+      filterSwitches.forEach((id, index) => (map[id] = shuffledFilter[index]));
+      uiSwitches.forEach((id, index) => (map[id] = shuffledUI[index]));
+      return map;
+    };
+
+    if (haoVanDeToggle) {
+      haoVanDeToggle.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          e.target.checked = false; // 视觉上先恢复，等待用户确认
+          haoVanDeModal.classList.add("show");
+        } else {
+          // 关闭好van的，销毁随机字典
+          config.ui.haoVanDe = false;
+          config.ui.haoVanDeMap = null;
+          saveAndRefresh();
+        }
+      });
+    }
+
+    document
+      .getElementById("modal-btn-cancel")
+      ?.addEventListener("click", () => {
+        haoVanDeModal.classList.remove("show");
+      });
+
+    document
+      .getElementById("modal-btn-export")
+      ?.addEventListener("click", () => {
+        configManager.exportJSON(config);
+      });
+
+    document
+      .getElementById("modal-btn-confirm")
+      ?.addEventListener("click", () => {
+        haoVanDeModal.classList.remove("show");
+        config.ui.haoVanDe = true;
+        config.ui.haoVanDeMap = generateMap(); // 生成全新的混沌闭环
+        haoVanDeToggle.checked = true;
+        saveAndRefresh();
       });
   };
 

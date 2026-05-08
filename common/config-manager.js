@@ -43,6 +43,8 @@ class ConfigManager {
         infoHoverDelay: 500,
         showIpLocation: false,
         showCoverViewer: false,
+        haoVanDe: false,
+        haoVanDeMap: null,
       },
     };
   }
