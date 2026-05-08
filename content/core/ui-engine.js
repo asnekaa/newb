@@ -4,7 +4,18 @@ class UIEngine {
     this.nightModeClass = "newb-night-mode";
     this.namespaceClass = "newb-optimized-layout";
     this.storageKeyLayout = "newb_layout_opt";
+    this.storageKeyRedirect = "newb_redirect_home";
     this.storageKeyIp = "newb_show_ip";
+
+    // 首页重定向拦截 (最高优先级，同步阻塞执行，彻底杜绝页面闪烁)
+    if (
+      localStorage.getItem(this.storageKeyRedirect) === "true" &&
+      location.hostname === "www.bilibili.com" &&
+      (location.pathname === "/" || location.pathname === "/index.html")
+    ) {
+      location.replace("https://search.bilibili.com");
+      return;
+    }
 
     this.currentNightModeConfig = null; // 缓存 Dark♂ 模式配置
     this.systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -45,20 +56,32 @@ class UIEngine {
     const isMasterOn = config.masterSwitch ?? true;
     const uiCfg = config.ui || {};
 
-    const isLayoutEnabled = isMasterOn && !!uiCfg.layoutOptimization;
-    const isHideHotSearch = isMasterOn && !!uiCfg.hideHotSearch;
-    const isHideRecommend = isMasterOn && !!uiCfg.hideRecommend;
-    const isHideHomeFeed = isMasterOn && !!uiCfg.hideHomeFeed;
-    const isUserInfoHover = isMasterOn && (uiCfg.userInfoHover ?? true);
-    const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
     const nm = isMasterOn
       ? uiCfg.nightMode || { enabled: false }
       : { enabled: false };
+    const isLayoutEnabled = isMasterOn && !!uiCfg.layoutOptimization;
+    const isHideHotSearch = isMasterOn && !!uiCfg.hideHotSearch;
+    const isHideRecommend = isMasterOn && !!uiCfg.hideRecommend;
+    const isRedirectHome = isMasterOn && !!uiCfg.redirectHomeToSearch;
+    const isHideHomeFeed = isMasterOn && !!uiCfg.hideHomeFeed;
+    const isUserInfoHover = isMasterOn && (uiCfg.userInfoHover ?? true);
+    const isIpEnabled = isMasterOn && !!uiCfg.showIpLocation;
 
     // 2. 跨域/跨页面状态同步 (供 inject 脚本读取)
     localStorage.setItem("newb_master_switch", isMasterOn);
     localStorage.setItem(this.storageKeyLayout, isLayoutEnabled);
+    localStorage.setItem(this.storageKeyRedirect, isRedirectHome);
     localStorage.setItem(this.storageKeyIp, isIpEnabled);
+
+    // 异步兜底重定向 (处理首次跨域配置同步时的延迟)
+    if (
+      isRedirectHome &&
+      location.hostname === "www.bilibili.com" &&
+      (location.pathname === "/" || location.pathname === "/index.html")
+    ) {
+      location.replace("https://search.bilibili.com");
+      return;
+    }
 
     // 3. 布局优化注入 (规避个人空间页面的样式冲突)
     const root = document.documentElement;
