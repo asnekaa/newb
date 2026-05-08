@@ -174,6 +174,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const saveAndRefresh = async () => {
     // 好van的拦截器：若开启，则通过随机字典读取错位的 DOM 状态
     const getVal = (id) => {
+      if (id === "ui-hao-van-de" || id === "master-switch") {
+        const el = document.getElementById(id);
+        return el ? el.checked : false;
+      }
       const mappedId =
         config.ui.haoVanDe && config.ui.haoVanDeMap
           ? config.ui.haoVanDeMap[id] || id
@@ -207,6 +211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     config.ui.userInfoHover = getVal("ui-user-info-hover");
     config.ui.showIpLocation = getVal("ui-show-ip");
     config.ui.showCoverViewer = getVal("ui-show-cover-viewer");
+    config.ui.haoVanDe = getVal("ui-hao-van-de"); // 确保状态同步时包含自身，但已被 getVal 豁免错位
 
     const nightModeSelect = document.getElementById(
       "ui-night-mode-select",
