@@ -114,6 +114,11 @@ class FilterEngine {
   updateConfig(config) {
     const filterCfg = config.filter || {};
     this.config = {
+      durationEnabled: filterCfg.durationEnabled ?? true,
+      titleEnabled: filterCfg.titleEnabled ?? true,
+      upEnabled: filterCfg.upEnabled ?? true,
+      sectionEnabled: filterCfg.sectionEnabled ?? true,
+      tagEnabled: filterCfg.tagEnabled ?? true,
       titleRules: this.parseRules(filterCfg.titleKeywords || []),
       upRules: this.parseRules(filterCfg.upKeywords || []),
       sectionRules: filterCfg.sectionKeywords || [],
@@ -297,7 +302,7 @@ class FilterEngine {
     }
 
     // 1. 时长过滤 (无需 API 请求，性能最高)
-    if (this.config.minDuration > 0) {
+    if (this.config.durationEnabled && this.config.minDuration > 0) {
       const durationEl = card.querySelector(
         ".bili-video-card__stats__duration, .duration, .bpx-player-homepage-time-label-total-time",
       );
@@ -320,28 +325,32 @@ class FilterEngine {
     }
 
     // 2. 标题过滤
-    const hitTitle = this.isHit(title, this.config.titleRules);
-    if (hitTitle)
-      return this.removeCard(
-        card,
-        title,
-        up,
-        hitTitle,
-        "标题",
-        videoUrl,
-        upUrl,
-      );
+    if (this.config.titleEnabled) {
+      const hitTitle = this.isHit(title, this.config.titleRules);
+      if (hitTitle)
+        return this.removeCard(
+          card,
+          title,
+          up,
+          hitTitle,
+          "标题",
+          videoUrl,
+          upUrl,
+        );
+    }
 
     // 3. UP主过滤
-    const hitUp = this.isHit(up, this.config.upRules);
-    if (hitUp)
-      return this.removeCard(card, title, up, hitUp, "UP主", videoUrl, upUrl);
+    if (this.config.upEnabled) {
+      const hitUp = this.isHit(up, this.config.upRules);
+      if (hitUp)
+        return this.removeCard(card, title, up, hitUp, "UP主", videoUrl, upUrl);
+    }
 
     // 4. 高级过滤 (分区/标签) - 需发起 API 请求
-    if (
-      this.config.sectionRules.length > 0 ||
-      this.config.tagRules.length > 0
-    ) {
+    const needSection =
+      this.config.sectionEnabled && this.config.sectionRules.length > 0;
+    const needTag = this.config.tagEnabled && this.config.tagRules.length > 0;
+    if (needSection || needTag) {
       const bvidMatch = videoUrl.match(/BV\w+/);
       if (bvidMatch)
         this.checkAdvanced(card, bvidMatch[0], title, up, videoUrl, upUrl);
@@ -369,7 +378,7 @@ class FilterEngine {
     if (!view) return;
 
     // 4.1 分区过滤
-    if (this.config.sectionRules.length > 0) {
+    if (this.config.sectionEnabled && this.config.sectionRules.length > 0) {
       const tname = TID_MAP[view.tid] || view.tname || "未知分区";
       const hitKw = this.config.sectionRules.find((kw) => tname.includes(kw));
       if (hitKw)
@@ -377,7 +386,11 @@ class FilterEngine {
     }
 
     // 4.2 标签过滤
-    if (this.config.tagRules.length > 0 && apiData.Tags) {
+    if (
+      this.config.tagEnabled &&
+      this.config.tagRules.length > 0 &&
+      apiData.Tags
+    ) {
       for (const { tag_name } of apiData.Tags) {
         const hitTag = this.isHit(tag_name, this.config.tagRules);
         if (hitTag)

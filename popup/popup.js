@@ -33,6 +33,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("cleanup-enabled").checked = config.cleanup.enabled;
     document.getElementById("min-duration").value = config.filter.minDuration;
 
+    // 渲染过滤子项开关 (兼容旧版配置，默认开启)
+    document.getElementById("duration-enabled").checked =
+      config.filter.durationEnabled ?? true;
+    document.getElementById("title-enabled").checked =
+      config.filter.titleEnabled ?? true;
+    document.getElementById("up-enabled").checked =
+      config.filter.upEnabled ?? true;
+    document.getElementById("section-enabled").checked =
+      config.filter.sectionEnabled ?? true;
+    document.getElementById("tag-enabled").checked =
+      config.filter.tagEnabled ?? true;
+
     // 2. UI 增强开关渲染
     const ui = config.ui;
     document.getElementById("ui-layout-opt").checked = ui.layoutOptimization;
@@ -162,7 +174,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     config.filter.minDuration =
       parseFloat(document.getElementById("min-duration").value) || 0;
 
-    config.ui.layoutOptimization =
+    // 保存过滤子项开关状态
+    config.filter.durationEnabled =
+      document.getElementById("duration-enabled").checked;
+    config.filter.titleEnabled =
+      document.getElementById("title-enabled").checked;
+    config.filter.upEnabled = document.getElementById("up-enabled").checked;
+    config.filter.sectionEnabled =
+      document.getElementById("section-enabled").checked;
+    config.filter.tagEnabled = document.getElementById("tag-enabled").checked;
+
+    config.ui.layoutOptimization ==
       document.getElementById("ui-layout-opt").checked;
     config.ui.hideRecommend =
       document.getElementById("ui-hide-recommend").checked;
@@ -262,6 +284,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const inputs = [
       "master-switch",
       "cleanup-enabled",
+      "duration-enabled",
+      "title-enabled",
+      "up-enabled",
+      "section-enabled",
+      "tag-enabled",
       "ui-layout-opt",
       "ui-show-ip",
       "ui-hide-hot-search",

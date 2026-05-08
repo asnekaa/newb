@@ -57,20 +57,51 @@
                 <span class="slider"></span>
               </label>
             </div>
-            <div class="form-group inline-group">
-              <label for="min-duration">最短时长 (分钟, 0不限制)</label>
-              <input
-                type="number"
-                id="min-duration"
-                min="0"
-                step="0.5"
-                style="width: 60px; text-align: center"
-              />
+            <!-- 时长过滤 -->
+            <div class="form-group">
+              <div class="inline-group">
+                <label for="duration-enabled">最短时长过滤</label>
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="duration-enabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div
+                class="input-row"
+                style="
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-top: 8px;
+                "
+              >
+                <span style="font-size: 11px; color: var(--text-sub)"
+                  >阈值 (分钟, 0不限制)</span
+                >
+                <input
+                  type="number"
+                  id="min-duration"
+                  min="0"
+                  step="0.5"
+                  style="width: 60px; text-align: center"
+                />
+              </div>
             </div>
 
             <!-- 关键词过滤组 (支持正则与通配符) -->
             <div class="form-group">
-              <label for="title-input">标题屏蔽</label>
+              <div class="inline-group">
+                <label for="title-enabled">标题屏蔽</label>
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="title-enabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
               <div class="input-row">
                 <input
                   type="text"
@@ -83,7 +114,16 @@
             </div>
 
             <div class="form-group">
-              <label for="up-input">UP主屏蔽</label>
+              <div class="inline-group">
+                <label for="up-enabled">UP主屏蔽</label>
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="up-enabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
               <div class="input-row">
                 <input
                   type="text"
@@ -96,7 +136,16 @@
             </div>
 
             <div class="form-group">
-              <label for="section-input">分区屏蔽</label>
+              <div class="inline-group">
+                <label for="section-enabled">分区屏蔽</label>
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="section-enabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
               <div class="input-row">
                 <input
                   type="text"
@@ -109,7 +158,16 @@
             </div>
 
             <div class="form-group">
-              <label for="tag-input">标签屏蔽</label>
+              <div class="inline-group">
+                <label for="tag-enabled">标签屏蔽</label>
+                <label
+                  class="switch"
+                  style="transform: scale(0.8); transform-origin: right center"
+                >
+                  <input type="checkbox" id="tag-enabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
               <div class="input-row">
                 <input
                   type="text"
