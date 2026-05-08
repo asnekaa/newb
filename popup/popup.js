@@ -498,12 +498,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document
       .getElementById("modal-btn-confirm")
-      ?.addEventListener("click", () => {
+      ?.addEventListener("click", async () => {
         haoVanDeModal.classList.remove("show");
         config.ui.haoVanDe = true;
         config.ui.haoVanDeMap = generateMap(); // 生成全新的混沌闭环
         haoVanDeToggle.checked = true;
-        saveAndRefresh();
+        await configManager.saveLocal(config);
+        renderAll();
       });
   };
 
