@@ -190,12 +190,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("ui-layout-opt").checked;
     config.ui.hideHotSearch =
       document.getElementById("ui-hide-hot-search").checked;
-    config.ui.redirectHomeToSearch =
-      document.getElementById("ui-hide-recommend").checked;
-    config.ui.hideHomeFeed =
-      document.getElementById("ui-redirect-home").checked;
     config.ui.hideRecommend =
+      document.getElementById("ui-hide-recommend").checked;
+    config.ui.redirectHomeToSearch =
+      document.getElementById("ui-redirect-home").checked;
+    config.ui.hideHomeFeed =
       document.getElementById("ui-hide-home-feed").checked;
+
     config.ui.videoInfoHover = document.getElementById(
       "ui-video-info-hover",
     ).checked;
