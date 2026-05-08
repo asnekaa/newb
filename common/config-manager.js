@@ -14,14 +14,14 @@ class ConfigManager {
       filter: {
         enabled: true,
         durationEnabled: true,
-        titleEnabled: true,
-        upEnabled: true,
-        sectionEnabled: true,
-        tagEnabled: true,
         minDuration: 0,
+        titleEnabled: true,
         titleKeywords: [],
+        upEnabled: true,
         upKeywords: [],
+        sectionEnabled: true,
         sectionKeywords: [],
+        tagEnabled: true,
         tagKeywords: [],
       },
       ui: {
